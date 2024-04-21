@@ -8,17 +8,15 @@ using Microsoft.EntityFrameworkCore;
 namespace api.Data
 {
 
-//giant class that allows you to search your individual tables
     public class ApplicationDBContext :DbContext
     {
         public ApplicationDBContext(DbContextOptions dbContextOptions)
 
-        :base(dbContextOptions)//base= workaround because we can't just type ":DbContext(){}" 
+        :base(dbContextOptions)
         {
             
         }
 
-        //add for each table -links db to code
         public DbSet<Station> Station {get; set;}
         public DbSet<Transaction> Transaction {get; set;}
         
