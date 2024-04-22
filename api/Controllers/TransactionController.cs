@@ -39,7 +39,7 @@ namespace api.Controllers
         }
 
         //get transaction by id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         //.net will use model-binding to extract the string from [HttpGet("{id}")]
         //and turn it into int and pass it into code
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -67,7 +67,8 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateTransactionRequestDto transactionDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreateTransactionRequest transactionDto because the user will not have to input all the data (aka the entire model)
-        {
+        {   if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             var transactionModel = transactionDto.ToTransactionFromCreateDto();
             await _transactionRepo.CreateAsync(transactionModel);
             return CreatedAtAction(nameof(GetById), new { id = transactionModel.Id }, transactionModel.ToTransactionDto());
@@ -75,10 +76,12 @@ namespace api.Controllers
         }
         
         [HttpPut]
-        [Route ("{id}")]
+        [Route ("{id:int}")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
         {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             //check if transaction with id exists
             var transactionModel = await _transactionRepo.UpdateAsync(id, updateDto);
 

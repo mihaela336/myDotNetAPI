@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using api.Dtos.Station;
 
 namespace api.Dtos.Transaction
@@ -16,12 +17,19 @@ namespace api.Dtos.Transaction
        // public StationDto Station {get; set;}
 
         public DateTime CreatedOn {get; set;} = DateTime.Now;
-
+        [Required]
+        [Range(0, 1000)]
         public decimal KwPrice {get; set;}
+        [Required]
+        [Range(0, 100000)]
         public decimal KwTotal {get; set;}
         // [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
+        [Required]
+        [Range(0, 1000)]
         public decimal SurchargeHour {get; set;}
         // [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
+        [Required]
+        [Range(0, 100000)]
         public decimal SurchargeTotal {get; set;}
     }
 }
