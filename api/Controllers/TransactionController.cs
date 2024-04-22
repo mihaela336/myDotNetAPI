@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Transaction;
+using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,10 @@ namespace api.Controllers
     {
         //read only so it's not mutable
         private readonly ApplicationDBContext _context;
-        public TransactionController(ApplicationDBContext context)
+        private readonly ITransactionRepository _transactionRepo;
+        public TransactionController(ApplicationDBContext context, ITransactionRepository transactionRepo)
         {
+            _transactionRepo = transactionRepo;
             _context = context;
 
         }
@@ -29,8 +32,7 @@ namespace api.Controllers
          //_context.Transactions returns a list like object if u add TOList - it will create the sql to go out to db and retrieve data
          //TODO: read about defered execution
 
-            var transactions = await _context.Transactions.ToListAsync();
-            //update after mapper was created
+            var transactions = await _transactionRepo.GetAllAsync();
             //.Select == .net version of Map => will return a imutable list of transaction Dto
            var transactionDto = transactions.Select(s => s.ToTransactionDto());
             return Ok(transactions);
@@ -42,7 +44,8 @@ namespace api.Controllers
         //and turn it into int and pass it into code
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var transaction = await _context.Transactions.FindAsync(id);
+            //var transaction = await _context.Transactions.FindAsync(id); //before repo refactoring
+            var transaction = await _transactionRepo.GetByIdAsync(id);
             if (transaction == null)
             {
                 //NotFund is a form of IActionResult
@@ -66,32 +69,24 @@ namespace api.Controllers
         // uses CreateTransactionRequest transactionDto because the user will not have to input all the data (aka the entire model)
         {
             var transactionModel = transactionDto.ToTransactionFromCreateDto();
-            await _context.Transactions.AddAsync(transactionModel);
-           await _context.SaveChangesAsync();
-
+            await _transactionRepo.CreateAsync(transactionModel);
             return CreatedAtAction(nameof(GetById), new { id = transactionModel.Id }, transactionModel.ToTransactionDto());
 
         }
+        
         [HttpPut]
         [Route ("{id}")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
         {
             //check if transaction with id exists
-            var transactionModel = await _context.Transactions.FirstOrDefaultAsync(x=> x.Id == id);
+            var transactionModel = await _transactionRepo.UpdateAsync(id, updateDto);
 
             if(transactionModel == null)
             {
                 return NotFound();
             }
-            transactionModel.StationId = updateDto.StationId;
-            transactionModel.CreatedOn = updateDto.CreatedOn;
-            transactionModel.KwPrice= updateDto.KwPrice;
-            transactionModel.KwTotal= updateDto.KwTotal;
-            transactionModel.SurchargeHour= updateDto.SurchargeHour;
-            transactionModel.SurchargeTotal = updateDto.SurchargeTotal;
 
-           await _context.SaveChangesAsync();
             return Ok(transactionModel.ToTransactionDto());
 
         }
@@ -100,19 +95,13 @@ namespace api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id )
         {
-            var transactionModel = await _context.Transactions.FirstOrDefaultAsync(x=>x.Id==id);
+            var transactionModel = await _transactionRepo.DeleteAsync(id);
             if(transactionModel == null)
             {
                 return NotFound();
             }
-             _context.Transactions.Remove(transactionModel);//do not add await here because remove is not an async function
-            await _context.SaveChangesAsync();
             return NoContent();
-
         }
-
-
-
 
     }
 }
