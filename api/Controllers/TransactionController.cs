@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -23,7 +24,8 @@ namespace api.Controllers
         public IActionResult GetAll()
         {
 
-            var transactions = _context.Transactions.ToList();
+            var transactions = _context.Transactions.ToList()
+            .Select(s=> s.ToTransactionDto());
             return Ok(transactions);
         }
 
@@ -37,7 +39,7 @@ namespace api.Controllers
                 return NotFound();
 
             }
-            return Ok (transaction);
+            return Ok (transaction.ToTransactionDto());
         }
 
    
