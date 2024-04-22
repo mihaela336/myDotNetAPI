@@ -16,6 +16,7 @@ namespace api.Mappers
             return new TransactionDto
             {
                 Id = transactionModel.Id,
+                //Station = transactionModel.Station.Select(c => c.ToStationDto());
                 CreatedOn = transactionModel.CreatedOn,
                 KwTotal = transactionModel.KwTotal,
                 SurchargeTotal = transactionModel.SurchargeTotal

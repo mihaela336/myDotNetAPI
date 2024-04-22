@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dtos.Station;
 
 namespace api.Dtos.Transaction
 {
@@ -10,6 +11,9 @@ namespace api.Dtos.Transaction
   // remove station/station id so it will not be sent right now into the response
   // [Column(TypeName="decimal(18,2)")] before atributes because the model already formats the data
         public int Id { get; set; }
+
+//atempt to add station name
+       // public StationDto Station {get; set;}
 
         public DateTime CreatedOn {get; set;} = DateTime.Now;
 
