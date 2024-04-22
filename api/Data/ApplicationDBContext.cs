@@ -17,8 +17,8 @@ namespace api.Data
             
         }
 
-        public DbSet<Station> Station {get; set;}
-        public DbSet<Transaction> Transaction {get; set;}
+        public DbSet<Station> Stations {get; set;}
+        public DbSet<Transaction> Transactions {get; set;}
         
     }
 }
