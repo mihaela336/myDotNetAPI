@@ -10,7 +10,7 @@ namespace api.Models
     {
         public int Id { get; set; }
 
-        public int? StationId{get; set;}//TODO: check if it actually works
+        public int? StationId{get; set;}//TODO: check if it actually works TODO: reolace stationId with sessionId
         //navigation property -alows us to navigate whitin models
         public Station? Station {get; set;}//TODO: have buddy chat explain the syntax
         public DateTime CreatedOn {get; set;} = DateTime.Now;
