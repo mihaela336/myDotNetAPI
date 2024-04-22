@@ -71,6 +71,45 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = transactionModel.Id }, transactionModel.ToTransactionDto());
 
         }
+        [HttpPut]
+        [Route ("{id}")]
+        //Lpt create separate dtos for each separate endpoint because each of them is going to be different
+        public IActionResult Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
+        {
+            //check if transaction with id exists
+            var transactionModel = _context.Transactions.FirstOrDefault(x=> x.Id == id);
+
+            if(transactionModel == null)
+            {
+                return NotFound();
+            }
+            transactionModel.StationId = updateDto.StationId;
+            transactionModel.CreatedOn = updateDto.CreatedOn;
+            transactionModel.KwPrice= updateDto.KwPrice;
+            transactionModel.KwTotal= updateDto.KwTotal;
+            transactionModel.SurchargeHour= updateDto.SurchargeHour;
+            transactionModel.SurchargeTotal = updateDto.SurchargeTotal;
+
+            _context.SaveChanges();
+            return Ok(transactionModel.ToTransactionDto());
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete([FromRoute] int id )
+        {
+            var transactionModel =_context.Transactions.FirstOrDefault(x=>x.Id==id);
+            if(transactionModel == null)
+            {
+                return NotFound();
+            }
+            _context.Transactions.Remove(transactionModel);
+            _context.SaveChanges();
+            return NoContent();
+
+        }
+
 
 
 
