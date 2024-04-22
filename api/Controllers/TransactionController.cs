@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Transaction;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -23,15 +24,15 @@ namespace api.Controllers
 
         // get all rtransactions
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {//_context.Transactions.ToList(); = deffered(?) execution
          //_context.Transactions returns a list like object if u add TOList - it will create the sql to go out to db and retrieve data
          //TODO: read about defered execution
 
-            var transactions = _context.Transactions.ToList()
+            var transactions = await _context.Transactions.ToListAsync();
             //update after mapper was created
             //.Select == .net version of Map => will return a imutable list of transaction Dto
-            .Select(s => s.ToTransactionDto());
+           var transactionDto = transactions.Select(s => s.ToTransactionDto());
             return Ok(transactions);
         }
 
@@ -39,9 +40,9 @@ namespace api.Controllers
         [HttpGet("{id}")]
         //.net will use model-binding to extract the string from [HttpGet("{id}")]
         //and turn it into int and pass it into code
-        public IActionResult GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var transaction = _context.Transactions.Find(id);
+            var transaction = await _context.Transactions.FindAsync(id);
             if (transaction == null)
             {
                 //NotFund is a form of IActionResult
@@ -60,13 +61,13 @@ namespace api.Controllers
 
         //part 6. add post method
         [HttpPost]
-        public IActionResult Create([FromBody] CreateTransactionRequestDto transactionDto)
+        public async Task<IActionResult> Create([FromBody] CreateTransactionRequestDto transactionDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreateTransactionRequest transactionDto because the user will not have to input all the data (aka the entire model)
         {
             var transactionModel = transactionDto.ToTransactionFromCreateDto();
-            _context.Transactions.Add(transactionModel);
-            _context.SaveChanges();
+            await _context.Transactions.AddAsync(transactionModel);
+           await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = transactionModel.Id }, transactionModel.ToTransactionDto());
 
@@ -74,10 +75,10 @@ namespace api.Controllers
         [HttpPut]
         [Route ("{id}")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
-        public IActionResult Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
+        public async Task<IActionResult> Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
         {
             //check if transaction with id exists
-            var transactionModel = _context.Transactions.FirstOrDefault(x=> x.Id == id);
+            var transactionModel = await _context.Transactions.FirstOrDefaultAsync(x=> x.Id == id);
 
             if(transactionModel == null)
             {
@@ -90,22 +91,22 @@ namespace api.Controllers
             transactionModel.SurchargeHour= updateDto.SurchargeHour;
             transactionModel.SurchargeTotal = updateDto.SurchargeTotal;
 
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
             return Ok(transactionModel.ToTransactionDto());
 
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete([FromRoute] int id )
+        public async Task<IActionResult> Delete([FromRoute] int id )
         {
-            var transactionModel =_context.Transactions.FirstOrDefault(x=>x.Id==id);
+            var transactionModel = await _context.Transactions.FirstOrDefaultAsync(x=>x.Id==id);
             if(transactionModel == null)
             {
                 return NotFound();
             }
-            _context.Transactions.Remove(transactionModel);
-            _context.SaveChanges();
+             _context.Transactions.Remove(transactionModel);//do not add await here because remove is not an async function
+            await _context.SaveChangesAsync();
             return NoContent();
 
         }
