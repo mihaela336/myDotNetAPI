@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Transaction;
+using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,10 @@ namespace api.Controllers
     {
         //read only so it's not mutable
         private readonly ApplicationDBContext _context;
-        public TransactionController(ApplicationDBContext context)
+        private readonly ITransactionRepository _transactionRepo;
+        public TransactionController(ApplicationDBContext context, ITransactionRepository transactionRepo)
         {
+            _transactionRepo = transactionRepo;
             _context = context;
 
         }
@@ -29,8 +32,7 @@ namespace api.Controllers
          //_context.Transactions returns a list like object if u add TOList - it will create the sql to go out to db and retrieve data
          //TODO: read about defered execution
 
-            var transactions = await _context.Transactions.ToListAsync();
-            //update after mapper was created
+            var transactions = await _transactionRepo.GetAllAsync();
             //.Select == .net version of Map => will return a imutable list of transaction Dto
            var transactionDto = transactions.Select(s => s.ToTransactionDto());
             return Ok(transactions);
