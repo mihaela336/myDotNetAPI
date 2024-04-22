@@ -28,5 +28,16 @@ namespace api.Controllers
 
             return Ok(StationDto);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var station = await _stationRepo.GetByIdAsync(id);
+            if (station == null)
+            {
+                return NotFound();
+            }
+            return Ok(station.ToStationDto());
+        }
     }
 }

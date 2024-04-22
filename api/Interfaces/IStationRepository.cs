@@ -10,5 +10,7 @@ namespace api.Interfaces
     {
         //add one single method just 2 get the infrastructure build
         Task<List<Station>> GetAllAsync();
+
+        Task<Station?> GetByIdAsync(int id);
     }
 }

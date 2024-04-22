@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using api.Data;
 using api.Interfaces;
@@ -22,6 +23,11 @@ namespace api.Repository
         public async Task<List<Station>> GetAllAsync()
         {
             return await _context.Stations.ToListAsync();
+        }
+
+        public async Task<Station?> GetByIdAsync(int id)
+        {
+            return await _context.Stations.FindAsync(id);
         }
     }
 }
