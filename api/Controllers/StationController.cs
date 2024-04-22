@@ -2,11 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Data;
+using api.Interfaces;
+using api.Mappers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    public class StationController
+    [Route ("api/station") ]
+    [ApiController] //TODO: learn what this does
+    public class StationController : ControllerBase
     {
-        
+        private readonly IStationRepository _stationRepo;
+
+        public StationController(IStationRepository stationRepo)
+        {
+            _stationRepo = stationRepo;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var stations = await _stationRepo.GetAllAsync();
+            var StationDto = stations.Select(s=>s.ToStationDto());
+
+            return Ok(StationDto);
+        }
     }
 }

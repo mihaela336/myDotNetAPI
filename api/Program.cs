@@ -16,7 +16,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => {
 
 });
 
+//dependency injection TODO: Learn more about how it works
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IStationRepository, StationRepository>();
 
 var app = builder.Build();
 
