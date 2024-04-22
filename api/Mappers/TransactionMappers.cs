@@ -26,6 +26,22 @@ namespace api.Mappers
             };
             
         }
+
+        public static Transaction ToTransactionFromCreateDto(this CreateTransactionRequestDto transactionDto)
+        {
+            return new Transaction
+            {
+                StationId = transactionDto.StationId,
+                CreatedOn = transactionDto.CreatedOn,
+                KwPrice = transactionDto.KwPrice,
+                KwTotal = transactionDto.KwTotal,
+                SurchargeHour = transactionDto.SurchargeHour,
+                SurchargeTotal = transactionDto.SurchargeTotal
+
+            };
+        }
         
     }
+
+
 }
