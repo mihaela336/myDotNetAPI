@@ -44,7 +44,10 @@ namespace api.Repository
                 }
             }
 
-            return await stations.ToListAsync();
+            //pagination
+            var skipNumber = (query.PageNumber -1) * query.PageSize;
+
+            return await stations.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Station?> GetByIdAsync(int id)
