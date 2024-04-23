@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
-            var stations = await _stationRepo.GetAllAsync();
+            var stations = await _stationRepo.GetAllAsync(query);
             var StationDto = stations.Select(s=>s.ToStationDto());
 
             return Ok(StationDto);
