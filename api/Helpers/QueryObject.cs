@@ -10,5 +10,9 @@ namespace api.Helpers
         public string? Name {get; set;} = null;
 
         public string? Adress {get; set;} = null;
+
+        //sort
+        public string? SortBy {get; set;} = null;
+        public bool isDescending {get; set;} = false; 
     }
 }

@@ -34,6 +34,16 @@ namespace api.Repository
                 stations = stations.Where(s => s.Name.Contains(query.Adress));
             }
 
+            //just add another if to implement sorting
+            if(!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                //add if statement here for each individual column u want to sort by
+                if(query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    stations = query.isDescending ? stations.OrderByDescending(s => s.Name) : stations.OrderBy(s=>s.Name);
+                }
+            }
+
             return await stations.ToListAsync();
         }
 
