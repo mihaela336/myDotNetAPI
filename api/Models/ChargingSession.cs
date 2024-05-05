@@ -22,7 +22,7 @@ namespace api.Models
         public DateTime SessionStart { get; set; } =DateTime.Now;
         public DateTime SessionEnd { get; set; }
 
-        public DateTime ChargingTime { get; set; }
+        public TimeSpan ChargingTime { get; set; }
         [Column(TypeName="decimal(18,2)")] 
         public decimal KwhDelivered {get; set;}
 
