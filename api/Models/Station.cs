@@ -12,5 +12,11 @@ namespace api.Models
         public string Name {get; set;} = string.Empty;
         public string Adress {get; set;} = string.Empty;
 
+        public string Status {get; set;} = string.Empty; // status: available/ unavailable
+
+        //one to many relationship between station and chargingSessions pt1
+
+        public List<ChargingSession> ChargingSessions {get; set;} = new List<ChargingSession>();
+
     }
 }
