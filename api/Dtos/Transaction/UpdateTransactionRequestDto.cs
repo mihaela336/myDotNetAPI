@@ -14,10 +14,10 @@ namespace api.Dtos.Transaction
         public DateTime CreatedOn {get; set;} = DateTime.Now;
         [Required]
         [Range(0, 1000)]
-        public decimal KwPrice {get; set;}
+        public decimal KwhPrice {get; set;}
         [Required]
         [Range(0, 100000)]
-        public decimal KwTotal {get; set;}
+        public decimal KwhTotal {get; set;}
         [Required]
         [Range(0, 1000)]
         public decimal OverchargeHour {get; set;}

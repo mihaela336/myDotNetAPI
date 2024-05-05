@@ -23,7 +23,7 @@ namespace api.Models
         public DateTime SessionEnd { get; set; }
 
         public TimeSpan ChargingTime { get; set; }
-        [Column(TypeName="decimal(18,2)")] 
+        [Column(TypeName="decimal(18,5)")] 
         public decimal KwhDelivered {get; set;}
 
     }

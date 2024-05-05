@@ -59,8 +59,8 @@ namespace api.Repository
             
             existingTransaction.ChargingSessionId = transactionDto.ChargingSessionId;
             existingTransaction.CreatedOn = transactionDto.CreatedOn;
-            existingTransaction.KwPrice= transactionDto.KwPrice;
-            existingTransaction.KwTotal= transactionDto.KwTotal;
+            existingTransaction.KwhPrice= transactionDto.KwhPrice;
+            existingTransaction.KwhTotal= transactionDto.KwhTotal;
             existingTransaction.OverchargeHour= transactionDto.OverchargeHour;
             existingTransaction.OverchargeTotal = transactionDto.OverchargeTotal;
 

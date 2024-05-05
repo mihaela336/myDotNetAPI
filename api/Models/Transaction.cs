@@ -23,9 +23,9 @@ namespace api.Models
         public DateTime CreatedOn {get; set;} = DateTime.Now;
 
         [Column(TypeName="decimal(18,5)")] 
-        public decimal KwPrice {get; set;}
+        public decimal KwhPrice {get; set;}
         [Column(TypeName="decimal(18,5)")]
-        public decimal KwTotal {get; set;}
+        public decimal KwhTotal {get; set;}
          [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
         public decimal OverchargeHour {get; set;}
          [Column(TypeName="decimal(18,2)")] 
