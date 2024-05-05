@@ -10,8 +10,11 @@ namespace api.Models
     {
         public int Id { get; set; }
 
-        public int? ChargingSessionId{get; set;}//TODO: check if it actually works 
         //TODO: implement 1 to 1 relationship
+        public int ChargingSessionId{get; set;}//TODO: check if it actually works 
+
+        public ChargingSession ChargingSession {get; set;}
+        
 
         //1 to many relationship with userData pt2 TODO: check if working
         public int? UserDataId {get; set;} //forms fk relationship with db

@@ -17,9 +17,10 @@ namespace api.Mappers
             {
                 Id = transactionModel.Id,
                 //Station = transactionModel.Station.Select(c => c.ToStationDto());
+                ChargingSessionId = transactionModel.ChargingSessionId,
                 CreatedOn = transactionModel.CreatedOn,
                 KwTotal = transactionModel.KwTotal,
-                SurchargeTotal = transactionModel.SurchargeTotal
+                OverchargeTotal = transactionModel.OverchargeTotal
 
                 //nex update transaction controller
 
@@ -32,12 +33,12 @@ namespace api.Mappers
         {
             return new Transaction
             {
-                StationId = transactionDto.StationId,
+                ChargingSessionId = transactionDto.ChargingSessionId,
                 CreatedOn = transactionDto.CreatedOn,
                 KwPrice = transactionDto.KwPrice,
                 KwTotal = transactionDto.KwTotal,
-                SurchargeHour = transactionDto.SurchargeHour,
-                SurchargeTotal = transactionDto.SurchargeTotal
+                OverchargeHour = transactionDto.OverchargeHour,
+                OverchargeTotal = transactionDto.OverchargeTotal
 
             };
         }

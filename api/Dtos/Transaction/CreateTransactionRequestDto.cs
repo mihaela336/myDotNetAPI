@@ -10,7 +10,7 @@ namespace api.Dtos.Transaction
     {
         // the dto will have evrithyng from the model except the id (that is auto generated)
         //[Required]
-        public int? StationId{get; set;}//TODO: check if it actually works TODO: reolace stationId with sessionId
+        public int ChargingSessionId{get; set;}//TODO: check if it actually works TODO: reolace stationId with sessionId
         //navigation property -alows us to navigate whitin models
         public DateTime CreatedOn {get; set;} = DateTime.Now;
         [Required]
@@ -21,9 +21,9 @@ namespace api.Dtos.Transaction
         public decimal KwTotal {get; set;}
                 [Required]
         [Range(0, 1000)]
-        public decimal SurchargeHour {get; set;}
+        public decimal OverchargeHour {get; set;}
                 [Required]
         [Range(0, 100000)]
-        public decimal SurchargeTotal {get; set;}
+        public decimal OverchargeTotal {get; set;}
     }
 }

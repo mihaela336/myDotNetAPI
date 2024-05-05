@@ -15,6 +15,8 @@ namespace api.Dtos.Transaction
 
 //atempt to add station name
        // public StationDto Station {get; set;}
+        [Required]
+       public int ChargingSessionId {get; set;}
 
         public DateTime CreatedOn {get; set;} = DateTime.Now;
         [Required]
@@ -26,10 +28,10 @@ namespace api.Dtos.Transaction
         // [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
         [Required]
         [Range(0, 1000)]
-        public decimal SurchargeHour {get; set;}
+        public decimal OverchargeHour {get; set;}
         // [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
         [Required]
         [Range(0, 100000)]
-        public decimal SurchargeTotal {get; set;}
+        public decimal OverchargeTotal {get; set;}
     }
 }

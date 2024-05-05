@@ -57,12 +57,12 @@ namespace api.Repository
                 return null;
             }
             
-            existingTransaction.StationId = transactionDto.StationId;
+            existingTransaction.ChargingSessionId = transactionDto.ChargingSessionId;
             existingTransaction.CreatedOn = transactionDto.CreatedOn;
             existingTransaction.KwPrice= transactionDto.KwPrice;
             existingTransaction.KwTotal= transactionDto.KwTotal;
-            existingTransaction.SurchargeHour= transactionDto.SurchargeHour;
-            existingTransaction.SurchargeTotal = transactionDto.SurchargeTotal;
+            existingTransaction.OverchargeHour= transactionDto.OverchargeHour;
+            existingTransaction.OverchargeTotal = transactionDto.OverchargeTotal;
 
             await _context.SaveChangesAsync();
             return existingTransaction;

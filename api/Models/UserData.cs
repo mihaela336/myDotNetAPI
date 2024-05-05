@@ -8,6 +8,10 @@ namespace api.Models
     public class UserData
     {
         public int Id { get; set; }
+        // one to one relationship betweed user data and app user
+        public string AppUserId {get; set;}
+
+        public AppUser AppUser {get; set;}
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
