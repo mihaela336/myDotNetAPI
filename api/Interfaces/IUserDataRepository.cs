@@ -9,5 +9,7 @@ namespace api.Interfaces
     public interface IUserDataRepository
     {
         Task<List<UserData>> GetAllAsync();
+
+        Task<List<UserData>> GetByIdAsync(int id);
     }
 }

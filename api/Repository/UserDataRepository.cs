@@ -18,7 +18,19 @@ namespace api.Repository
         }
         public async Task<List<UserData>> GetAllAsync()
         {
-            return await _context.UsersData.ToListAsync();
+            return await _context.UsersData.Include(c=> c.Transactions).ToListAsync();
         }
+
+        public async Task<List<UserData>> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+           //  return await _context.UsersData.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
+
+        }
+
+        // public async Task<List<UserData>>GetByIdAsync (int id)
+        // {
+        //     return await _context.UsersData.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
+        // }
     }
 }

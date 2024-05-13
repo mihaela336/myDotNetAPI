@@ -18,7 +18,8 @@ namespace api.Mappers
                 Name = userDataModel.Name,
                 Email = userDataModel.Email,
                 Phone = userDataModel.Phone,
-                Adress = userDataModel.Adress
+                Adress = userDataModel.Adress,
+                Transactions = userDataModel.Transactions.Select(c=> c.ToTransactionDto()).ToList()
             };
         }
     }

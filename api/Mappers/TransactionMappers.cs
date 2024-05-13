@@ -38,7 +38,9 @@ namespace api.Mappers
                 KwhPrice = transactionDto.KwhPrice,
                 KwhTotal = transactionDto.KwhTotal,
                 OverchargeHour = transactionDto.OverchargeHour,
-                OverchargeTotal = transactionDto.OverchargeTotal
+                OverchargeTotal = transactionDto.OverchargeTotal,
+                VAT = transactionDto.VAT,
+                Total = transactionDto.Total
 
             };
         }

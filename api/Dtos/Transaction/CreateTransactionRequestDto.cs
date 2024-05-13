@@ -19,11 +19,17 @@ namespace api.Dtos.Transaction
          [Required]
         [Range(0, 100000)]
         public decimal KwhTotal {get; set;}
-                [Required]
+        [Required]
         [Range(0, 1000)]
         public decimal OverchargeHour {get; set;}
-                [Required]
+        [Required]
         [Range(0, 100000)]
         public decimal OverchargeTotal {get; set;}
+        [Required]
+        [Range(0, 100000)]
+        public decimal VAT {get; set;}
+        [Required]
+        [Range(0, 100000)]
+        public decimal Total {get; set;}
     }
 }

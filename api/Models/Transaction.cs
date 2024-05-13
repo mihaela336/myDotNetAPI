@@ -32,7 +32,12 @@ namespace api.Models
         public decimal OverchargeTotal {get; set;}
 
         [Column(TypeName="decimal(18,2)")] 
+        public decimal VAT {get; set;}
+
+        [Column(TypeName="decimal(18,2)")] 
         public decimal Total {get; set;}
+
+
 
 
     }

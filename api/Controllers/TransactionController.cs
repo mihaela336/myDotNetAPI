@@ -57,6 +57,21 @@ namespace api.Controllers
             //update after mapper was created
             return Ok(transaction.ToTransactionDto());
         }
+        //TODO: redo or fix error
+        [HttpGet("/user/{userId:int}")]
+
+        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
+        {
+            var transactions = await _transactionRepo.GetByUserIdAsync(userId);
+            if (transactions == null)
+            {
+
+                return NotFound();
+
+            }
+            //update after mapper was created
+            return Ok(transactions);
+        }
 
         //next, in order to test the controlled add it to Program.cs
         // type: builder.Services.AddControllers(); in Program.cs

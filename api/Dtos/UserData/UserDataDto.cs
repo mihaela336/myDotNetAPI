@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dtos.Transaction;
 
 namespace api.Dtos.UserData
 {
@@ -21,6 +22,6 @@ namespace api.Dtos.UserData
 
                 //one to many relationship between users and Transactions pt1
 
-       // public List<Transaction> Transactions {get; set;} = new List<Transaction>();
+        public List<TransactionDto> Transactions {get; set;}
     }
 }
