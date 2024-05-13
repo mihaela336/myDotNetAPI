@@ -12,11 +12,11 @@ namespace api.Interfaces
         Task<List<Transaction>> GetAllAsync();
         Task<Transaction?> GetByIdAsync(int id);//get the transaction using the id , FirstOrDefault can be NULL
         //get transactions for selected user
-        Task<List<Transaction?>>GetByUserIdAsync(int userId);
+        Task<List<Transaction?>> GetByUserIdAsync(int userId);
         Task<Transaction> CreateAsync(Transaction transactionModel);
         Task<Transaction?> UpdateAsync(int id, UpdateTransactionRequestDto transactionDto);
-        Task <Transaction?>DeleteAsync(int id);
- 
-        
+        Task<Transaction?> DeleteAsync(int id);
+
+
     }
 }

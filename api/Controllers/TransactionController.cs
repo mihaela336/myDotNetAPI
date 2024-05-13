@@ -25,7 +25,7 @@ namespace api.Controllers
 
         }
 
-        // get all rtransactions
+        // get all transactions
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {//_context.Transactions.ToList(); = deffered(?) execution
