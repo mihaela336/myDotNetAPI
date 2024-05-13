@@ -23,8 +23,12 @@ namespace api.Data
         //add for each table -links db to code
         public DbSet<Station> Stations {get; set;}
         public DbSet<ChargingSession> ChargingSessions {get; set;}
+         public DbSet<PaymentPlan> PaymentPlans {get; set;}
         public DbSet<Transaction> Transactions {get; set;}
         public DbSet<UserData> UsersData {get; set;}
+        public DbSet<Vehicle> Vehicles {get; set;}
+
+
 
 
 
