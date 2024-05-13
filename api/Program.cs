@@ -92,9 +92,11 @@ builder.Services.AddAuthentication(options => { //TODO: learn what this entire s
 
 //dependency injection TODO: Learn more about how it works
 builder.Services.AddScoped<IChargingSessionRepository, ChargingSessionRepository>();
+builder.Services.AddScoped<IPaymentPlanRepository, PaymentPlanRepository>();
 builder.Services.AddScoped<IStationRepository, StationRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IUserDataRepository, UserDataRepository>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
