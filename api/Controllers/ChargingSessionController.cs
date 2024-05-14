@@ -29,5 +29,13 @@ namespace api.Controllers
             return Ok(chargingSessionDto);
         }
 
+        [HttpGet("/testMobile")]
+        public async Task<IActionResult> GetDataFromAzure()
+        {
+
+
+            return Ok("got data from api");
+        }
+
     }
 }
