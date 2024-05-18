@@ -24,7 +24,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+       // [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             var stations = await _stationRepo.GetAllAsync(query);

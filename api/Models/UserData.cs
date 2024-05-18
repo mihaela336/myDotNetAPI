@@ -11,7 +11,7 @@ namespace api.Models
         // one to one relationship betweed user data and app user
         public string AppUserId {get; set;}
 
-        public AppUser AppUser {get; set;}
+      //  public AppUser AppUser {get; set;}
 
         //many to one relationship between payment plan aun users (one payment plan- multiple users)
         public int? PaymentPlanId {get; set;} //forms fk relationship with db

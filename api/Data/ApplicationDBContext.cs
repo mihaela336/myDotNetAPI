@@ -11,7 +11,7 @@ namespace api.Data
 {
 
 //giant class that allows you to search your individual tables
-    public class ApplicationDBContext :IdentityDbContext<AppUser>
+    public class ApplicationDBContext :DbContext
     {
         public ApplicationDBContext(DbContextOptions dbContextOptions)
 
@@ -32,26 +32,26 @@ namespace api.Data
 
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            List <IdentityRole>roles = new List<IdentityRole>
-            {
-                new IdentityRole 
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
+        // protected override void OnModelCreating(ModelBuilder builder)
+        // {
+        //     base.OnModelCreating(builder);
+        //     List <IdentityRole>roles = new List<IdentityRole>
+        //     {
+        //         new IdentityRole 
+        //         {
+        //             Name = "Admin",
+        //             NormalizedName = "ADMIN"
 
-                },
-                new IdentityRole 
-                {
-                    Name = "User",
-                    NormalizedName = "USER"
+        //         },
+        //         new IdentityRole 
+        //         {
+        //             Name = "User",
+        //             NormalizedName = "USER"
 
-                }
-            };
-            builder.Entity<IdentityRole>().HasData(roles);
-        }
+        //         }
+        //     };
+        //     builder.Entity<IdentityRole>().HasData(roles);
+        // }
         
     }
 }
