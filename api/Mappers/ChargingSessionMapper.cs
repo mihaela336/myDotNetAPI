@@ -21,5 +21,18 @@ namespace api.Mappers
                 KwhDelivered = chargingSessionModel.KwhDelivered
             };
         }
+
+        public static ChargingSession ToChargingSessionFromCreateDto(this CreateChargingSessionRequestDto chargingSessionDto)
+        {
+            return new ChargingSession
+            {
+                StationId = chargingSessionDto.StationId,
+                UserDataId = chargingSessionDto.UserDataId,
+                SessionStart = chargingSessionDto.SessionStart,
+                ChargingTime = chargingSessionDto.ChargingTime,
+                KwhDelivered = chargingSessionDto.KwhDelivered
+
+            };
+        }
     }
 }

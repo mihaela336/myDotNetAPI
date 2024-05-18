@@ -51,15 +51,15 @@ builder.Services.AddControllers().AddNewtonsoftJson(options => {
 
 //connect to local sqlserver
 
-// builder.Services.AddDbContext<ApplicationDBContext>(options => {
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDbContext<ApplicationDBContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-// });
+});
 
 //connect to azure db
 
-var sqlConnection = builder.Configuration["ConnectionStrings:GreenParking:SqlDb"];
-builder.Services.AddSqlServer<ApplicationDBContext>(sqlConnection, options=>options.EnableRetryOnFailure());
+// var sqlConnection = builder.Configuration["ConnectionStrings:GreenParking:SqlDb"];
+// builder.Services.AddSqlServer<ApplicationDBContext>(sqlConnection, options=>options.EnableRetryOnFailure());
 
 //todo doc chapter on this
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>{
