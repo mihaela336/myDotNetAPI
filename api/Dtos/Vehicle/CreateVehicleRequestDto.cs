@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace api.Dtos.Vehicle
 {
-    public class VehicleDto
+    public class CreateVehicleRequestDto
     {
-        public int Id { get; set; }
-        public int? UserDataId {get; set;}
+        public int UserDataId {get; set;}
         public DateTime AddedOn { get; set; } = DateTime.Now;
         [Required]
         [MaxLength(50, ErrorMessage = "Producer must be under 50 characters")]

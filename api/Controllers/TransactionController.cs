@@ -57,8 +57,8 @@ namespace api.Controllers
             //update after mapper was created
             return Ok(transaction.ToTransactionDto());
         }
-        //TODO: redo or fix error
-        [HttpGet("/user/{userId:int}")]
+  
+        [HttpGet("user/{userId:int}")]
 
         public async Task<IActionResult> GetByUserId([FromRoute] int userId)
         {

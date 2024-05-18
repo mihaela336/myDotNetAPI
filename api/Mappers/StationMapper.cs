@@ -18,5 +18,15 @@ namespace api.Mappers
                 Adress = stationModel.Adress
             };
         }
+
+        public static Station ToStationFromCreateDto(this CreateStationRequestDto stationDto)
+        {
+            return new Station
+            {
+                Name = stationDto.Name,
+                Adress= stationDto.Adress
+ 
+            };
+        }
     }
 }

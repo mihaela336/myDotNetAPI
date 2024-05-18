@@ -19,8 +19,12 @@ namespace api.Mappers
                 //Station = transactionModel.Station.Select(c => c.ToStationDto());
                 ChargingSessionId = transactionModel.ChargingSessionId,
                 CreatedOn = transactionModel.CreatedOn,
+                KwhPrice = transactionModel.KwhPrice,
                 KwhTotal = transactionModel.KwhTotal,
-                OverchargeTotal = transactionModel.OverchargeTotal
+                OverchargeHour = transactionModel.OverchargeHour,
+                OverchargeTotal = transactionModel.OverchargeTotal,
+                VAT = transactionModel.VAT,
+                Total = transactionModel.Total
 
                 //nex update transaction controller
 

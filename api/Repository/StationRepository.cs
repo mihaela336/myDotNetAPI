@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos.Station;
 using api.Helpers;
 using api.Interfaces;
 using api.Models;
@@ -21,6 +22,26 @@ namespace api.Repository
         {
             _context = context;
         }
+
+        public async Task<Station> CreateAsync(Station stationModel)
+        {
+            await _context.Stations.AddAsync(stationModel);
+            await _context.SaveChangesAsync();
+            return stationModel;
+        }
+
+        public async Task<Station?> DeleteAsync(int id)
+        {
+            var stationModel = await _context.Stations.FirstOrDefaultAsync(x=>x.Id == id);
+            if(stationModel == null)
+            {
+                return null;
+            }
+             _context.Stations.Remove(stationModel);//do not add await here because remove is not an async function
+            await _context.SaveChangesAsync();
+            return stationModel;
+        }
+
         public async Task<List<Station>> GetAllAsync(QueryObject query)
         {
             var stations =  _context.Stations.AsQueryable();
@@ -54,5 +75,21 @@ namespace api.Repository
         {
             return await _context.Stations.FindAsync(id);
         }
+
+        public async Task<Station?> UpdateAsync(int id, UpdateStationRequestDto stationDto)
+        {
+            var existingStation = await _context.Stations.FirstOrDefaultAsync(x => x.Id == id);
+            if(existingStation == null)
+            {
+                return null;
+            }
+            
+            existingStation.Name = stationDto.Name;
+            existingStation.Adress = stationDto.Adress;
+
+            await _context.SaveChangesAsync();
+            return existingStation;
+        }
+
     }
 }

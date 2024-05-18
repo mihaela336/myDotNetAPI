@@ -19,5 +19,14 @@ namespace api.Mappers
 
             };
         }
+
+         public static PaymentPlan ToPaymentPlanFromCreateDto(this CreatePaymentPlanRequestDto paymentPlanDto)
+        {
+            return new PaymentPlan
+            {
+                PlanType = paymentPlanDto.PlanType
+
+            };
+        }
     }
 }
