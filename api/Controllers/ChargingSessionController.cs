@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Dtos.ChargingSession;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Hosting;
 
@@ -30,12 +31,21 @@ namespace api.Controllers
             return Ok(chargingSessionDto);
         }
 
-        [HttpGet("/testMobile")]
+        [HttpGet("/test_Authorised_Mobile")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetDataFromAzure()
         {
 
 
-            return Ok("got data from api");
+            return Ok("got data from Authorised endpoint");
+        }
+
+        [HttpGet("/test_Unauthorised_Mobile")]
+        public async Task<IActionResult> GetUnaothorisedDataFromAzure()
+        {
+
+
+            return Ok("got data from Unauthorised endpoint");
         }
 
         //get charging session by id
