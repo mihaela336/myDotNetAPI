@@ -11,13 +11,40 @@ namespace api.Data
 {
 
 //giant class that allows you to search your individual tables
-    public class ApplicationDBContext :DbContext
+    public class ApplicationDBContext :IdentityDbContext
     {
         public ApplicationDBContext(DbContextOptions dbContextOptions)
 
         :base(dbContextOptions)//base= workaround because we can't just type ":DbContext(){}" 
         {
             
+        }
+        //change identity table name
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(builder);
+        //     builder.HasDefaultSchema("Identity");
+        //     builder.Entity<IdentityUser>
+        //     (entity=>
+        //     { entity.ToTable(name:"User");
+        //     }
+        //     );
+
+
+        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+                    base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<IdentityUser>().Ignore(c => c.EmailConfirmed)
+                                            .Ignore(c => c.SecurityStamp)
+                                            .Ignore(c => c.ConcurrencyStamp)
+                                            .Ignore(c => c.PhoneNumberConfirmed)
+                                            .Ignore(c => c.AccessFailedCount)
+                                            .Ignore(c => c.LockoutEnd)
+                                            .Ignore(c=> c.LockoutEnabled)
+                                            .Ignore(c=>c.TwoFactorEnabled);
+
+        modelBuilder.Entity<IdentityUser>().ToTable("Users");//to change the name of table.
         }
 
         //add for each table -links db to code
@@ -27,6 +54,7 @@ namespace api.Data
         public DbSet<Transaction> Transactions {get; set;}
         public DbSet<UserData> UsersData {get; set;}
         public DbSet<Vehicle> Vehicles {get; set;}
+        public DbSet<AppUser> AppUsers {get; set;}
 
 
 
