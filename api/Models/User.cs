@@ -19,16 +19,15 @@ namespace api.Models
         public string Phone { get; set; } = string.Empty;
         public string Adress { get; set; } = string.Empty;
 
-        
-        //one to many relationship between users and chargingSessions pt1
+        //many to many relationship between users and userRole
+        public ICollection<UserRole> UserRoles { get; set; }
 
+        //one to many relationship between users and chargingSessions pt1
         public List<ChargingSession> ChargingSessions {get; set;} = new List<ChargingSession>();
 
          //one to many relationship between users and Transactions pt1
-
         public List<Transaction> Transactions {get; set;} = new List<Transaction>();
         //one to many relationship between users and Vehicles pt1
-
         public List<Vehicle> Vehicles {get; set;} = new List<Vehicle>(); 
     }
 }
