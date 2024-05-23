@@ -15,7 +15,7 @@ namespace api.Mappers
             {
                 Id = paymentPlanModel.Id,
                 PlanType = paymentPlanModel.PlanType,
-                UsersData = paymentPlanModel.UsersData.Select(u=>u.ToUserDataDto()).ToList()
+                Users = paymentPlanModel.Users.Select(u=>u.ToUserDto()).ToList()
 
             };
         }

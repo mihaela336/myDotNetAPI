@@ -6,10 +6,10 @@ using api.Models;
 
 namespace api.Interfaces
 {
-    public interface IUserDataRepository
+    public interface IUserRepository
     {
-        Task<List<UserData>> GetAllAsync();
+        Task<List<User>> GetAllAsync();
 
-        Task<List<UserData>> GetByIdAsync(int id);
+        Task<List<User>> GetByIdAsync(int id);
     }
 }

@@ -39,7 +39,7 @@ namespace api.Repository
 
         public async Task<List<PaymentPlan>> GetAllAsync()
         {
-            return await _context.PaymentPlans.Include(p=>p.UsersData).ToListAsync();
+            return await _context.PaymentPlans.Include(p=>p.Users).ToListAsync();
         }
 
         public async Task<PaymentPlan?> GetByIdAsync(int id)

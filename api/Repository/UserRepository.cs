@@ -9,26 +9,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
 {
-    public class UserDataRepository : IUserDataRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDBContext _context;
-        public UserDataRepository(ApplicationDBContext context)
+        public UserRepository(ApplicationDBContext context)
         {
             _context = context;
         }
-        public async Task<List<UserData>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            return await _context.UsersData.Include(c=> c.Transactions).ToListAsync();
+            return await _context.Users.Include(c=> c.Transactions).ToListAsync();
         }
 
-        public async Task<List<UserData>> GetByIdAsync(int id)
+        public async Task<List<User>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
            //  return await _context.UsersData.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
 
         }
 
-        // public async Task<List<UserData>>GetByIdAsync (int id)
+        // public async Task<List<User>>GetByIdAsync (int id)
         // {
         //     return await _context.UsersData.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
         // }

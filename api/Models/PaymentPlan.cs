@@ -11,8 +11,8 @@ namespace api.Models
 
         public string PlanType { get; set; } = string.Empty;
 
-        //1 to many relationship with userData 
-        public List<UserData> UsersData { get; set; } = new List<UserData>();
+        //1 to many relationship with User 
+        public List<User> Users { get; set; } = new List<User>();
 
     }
 }

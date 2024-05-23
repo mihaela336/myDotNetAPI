@@ -12,8 +12,10 @@ namespace api.Models
         //many to one relationship between payment plan aun users (one payment plan- multiple users)
         public int? PaymentPlanId {get; set;} //forms fk relationship with db
         public PaymentPlan? PaymentPlan {get; set;} 
-        public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Password { get; set; }= string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string Adress { get; set; } = string.Empty;
 

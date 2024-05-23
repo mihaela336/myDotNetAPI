@@ -15,7 +15,7 @@ namespace api.Mappers
             {
                 Id = chargingSessionModel.Id,
                 StationId = chargingSessionModel.StationId,
-                UserDataId = chargingSessionModel.UserDataId,
+                UserId = chargingSessionModel.UserId,
                 SessionStart = chargingSessionModel.SessionStart,
                 ChargingTime = chargingSessionModel.ChargingTime,
                 KwhDelivered = chargingSessionModel.KwhDelivered
@@ -27,7 +27,7 @@ namespace api.Mappers
             return new ChargingSession
             {
                 StationId = chargingSessionDto.StationId,
-                UserDataId = chargingSessionDto.UserDataId,
+                UserId = chargingSessionDto.UserId,
                 SessionStart = chargingSessionDto.SessionStart,
                 ChargingTime = chargingSessionDto.ChargingTime,
                 KwhDelivered = chargingSessionDto.KwhDelivered
