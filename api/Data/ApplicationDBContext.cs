@@ -10,23 +10,24 @@ using Microsoft.EntityFrameworkCore;
 namespace api.Data
 {
 
-//giant class that allows you to search your individual tables
-    public class ApplicationDBContext :DbContext
+    //giant class that allows you to search your individual tables
+    public class ApplicationDBContext : DbContext
     {
         public ApplicationDBContext(DbContextOptions dbContextOptions)
 
-        :base(dbContextOptions)//base= workaround because we can't just type ":DbContext(){}" 
+        : base(dbContextOptions)//base= workaround because we can't just type ":DbContext(){}" 
         {
-            
+
         }
 
         //add for each table -links db to code
-        public DbSet<Station> Stations {get; set;}
-        public DbSet<ChargingSession> ChargingSessions {get; set;}
-         public DbSet<PaymentPlan> PaymentPlans {get; set;}
-        public DbSet<Transaction> Transactions {get; set;}
-        public DbSet<UserData> UsersData {get; set;}
-        public DbSet<Vehicle> Vehicles {get; set;}
+        public DbSet<Station> Stations { get; set; }
+        public DbSet<ChargingSession> ChargingSessions { get; set; }
+        public DbSet<PaymentPlan> PaymentPlans { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserData> UsersData { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
 
 
@@ -52,6 +53,6 @@ namespace api.Data
         //     };
         //     builder.Entity<IdentityRole>().HasData(roles);
         // }
-        
+
     }
 }
