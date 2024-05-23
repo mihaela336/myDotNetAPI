@@ -16,9 +16,9 @@ namespace api.Models
         public ChargingSession ChargingSession {get; set;}
         
 
-        //1 to many relationship with userData pt2 TODO: check if working
-        public int? UserDataId {get; set;} //forms fk relationship with db
-        public UserData? UserData {get; set;} 
+        //1 to many relationship with User pt2 TODO: check if working
+        public int? UserId {get; set;} //forms fk relationship with db
+        public User? User {get; set;} 
 
         public DateTime CreatedOn {get; set;} = DateTime.Now;
 

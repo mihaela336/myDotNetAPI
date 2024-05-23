@@ -10,9 +10,9 @@ namespace api.Models
          public int Id { get; set; }
 
        
-        //1 to many relationship with userData pt2 TODO: check if working
-        public int? UserDataId {get; set;} //forms fk relationship with db
-        public UserData? UserData {get; set;} 
+        //1 to many relationship with user pt2 TODO: check if working
+        public int? UserId {get; set;} //forms fk relationship with db
+        public User? User {get; set;} 
 
         public DateTime AddedOn {get; set;} = DateTime.Now;
         public string Producer {get; set;} = string.Empty;

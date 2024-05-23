@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Dtos.UserData;
+using api.Dtos.User;
 
 namespace api.Dtos.PaymentPlan
 {
@@ -16,8 +16,8 @@ namespace api.Dtos.PaymentPlan
 
         public string PlanType { get; set; } = string.Empty;
 
-        //1 to many relationship with userData 
-        public List<UserDataDto> UsersData { get; set; }
+        //1 to many relationship with User 
+        public List<UserDto> Users { get; set; }
 
     }
 }

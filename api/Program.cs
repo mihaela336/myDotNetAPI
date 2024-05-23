@@ -2,10 +2,8 @@ using api.Data;
 using api.Interfaces;
 using api.Repository;
 using api.Models;//to fix appUsersError, not sure if ok
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -29,10 +27,14 @@ builder.Services.AddSingleton<CustomAuthService>();
 
 //connect to local sqlserver
 
-builder.Services.AddDbContext<ApplicationDBContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestConnection"));
 
 });
+
+
+
 
 //connect to azure db
 
@@ -44,7 +46,7 @@ builder.Services.AddScoped<IChargingSessionRepository, ChargingSessionRepository
 builder.Services.AddScoped<IPaymentPlanRepository, PaymentPlanRepository>();
 builder.Services.AddScoped<IStationRepository, StationRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-builder.Services.AddScoped<IUserDataRepository, UserDataRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 // builder.Services.AddScoped<ITokenService, TokenService>();
 

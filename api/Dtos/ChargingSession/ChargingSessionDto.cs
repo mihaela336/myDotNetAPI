@@ -11,7 +11,7 @@ namespace api.Dtos.ChargingSession
 
         public int? StationId {get; set;} 
 
-        public int? UserDataId {get; set;} 
+        public int? UserId {get; set;} 
         public DateTime SessionStart { get; set; } =DateTime.Now;
         public DateTime SessionEnd { get; set; }
 

@@ -10,7 +10,7 @@ namespace api.Dtos.Vehicle
     public class VehicleDto
     {
         public int Id { get; set; }
-        public int? UserDataId {get; set;}
+        public int? UserId {get; set;}
         public DateTime AddedOn { get; set; } = DateTime.Now;
         [Required]
         [MaxLength(50, ErrorMessage = "Producer must be under 50 characters")]

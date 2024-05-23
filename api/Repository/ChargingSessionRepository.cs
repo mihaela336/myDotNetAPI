@@ -49,7 +49,7 @@ namespace api.Repository
 
         public async Task<List<ChargingSession?>> GetByUserIdAsync(int userId)
         {
-            return await _context.ChargingSessions.Where(t => t.UserDataId == userId).ToListAsync();
+            return await _context.ChargingSessions.Where(t => t.UserId == userId).ToListAsync();
         }
 
         public async Task<ChargingSession?> UpdateAsync(int id, UpdateChargingSessionRequestDto chargingSessionnDto)
@@ -61,7 +61,7 @@ namespace api.Repository
             }
             
             existingChargingSession.StationId = chargingSessionnDto.StationId;
-            existingChargingSession.UserDataId = chargingSessionnDto.UserDataId;
+            existingChargingSession.UserId = chargingSessionnDto.UserId;
             existingChargingSession.SessionStart= chargingSessionnDto.SessionStart;
             existingChargingSession.SessionEnd = chargingSessionnDto.SessionEnd;
             existingChargingSession.ChargingTime = chargingSessionnDto.ChargingTime;
