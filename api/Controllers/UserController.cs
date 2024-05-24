@@ -25,5 +25,13 @@ namespace api.Controllers
             var userDto = user.Select(s => s.ToUserDto());
             return Ok(userDto);
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var user = await _userRepo.GetByIdAsync(id);
+        //    var userDto = user.Select(s => s.ToUserDto());
+        //    return Ok(userDto);
+        //}
     }
 }

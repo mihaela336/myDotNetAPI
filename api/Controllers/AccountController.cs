@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using api.Data;
+using api.Dtos.Account;
+using api.Dtos.User;
 using api.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -25,7 +27,7 @@ namespace api.Controllers
 
 
         [HttpPost("/register")]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(UserDto userDto)
         {
             try
             {
@@ -88,53 +90,102 @@ namespace api.Controllers
         }
 
         [HttpPost("/login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
+            var loginData = loginDto;
 
+
+            //1 check modelState is valid
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //2 search for user in db, if found return user object
+            //identity version - 
+            // var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
             var user = new User();
             user.Id = 1;
             user.Name = "Mihaela";
             user.Email = "test@email.com";
             user.Phone = "0000 000 000";
             user.Adress = "test adress of user 1";
-
-            //check model state 
-            if (ModelState.IsValid)
+            if (user.Email != loginDto.Email)
             {
-                //1 check modelState is valid
+                user = null;
+            }
 
-                // 2   take info from input like email and check in db if  we have an existing claims principal for that email
-                //if we don't it means the user is not registered => return unregistered => redirect to login
-                ClaimsPrincipal principal;
-                //instead of setting the principal will use dictionary
-                _auth.Users.TryGetValue(user.Email, out principal);
+            // if user not found -> keep this in final code
+            if (user == null) return Unauthorized("Invalid username!");
 
-                if (principal == null) return StatusCode(500); 
+            var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, user.Email),
+                        new Claim(ClaimTypes.Name, user.Name),
+                        new Claim(ClaimTypes.Role, "Admin"),
+                    };
 
-                //check based on the claim that the password is correct
-                //this will get password from db
-                var identity = principal.Identity as ClaimsIdentity; //get identity from principal and cast it as claims identity
-                var username = identity.FindFirst(ClaimTypes.Name)?.Value;//if Find first does not return null we will get a alue
-                //var password = identity.FindFirst(ClaimTypes.Password)?.Value; //might have 2 do custom claim
+            var claimsIdentity = new ClaimsIdentity(
+   claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                //AllowRefresh = <bool>,
+                // Refreshing the authentication session should be allowed.
 
-                //check if username and password match
-                if(username == user.Email /* && password == user.Password*/ )
-                {
-                    //1 sign user in
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    return Ok();
-                }
+                //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                // The time at which the authentication ticket expires. A 
+                // value set here overrides the ExpireTimeSpan option of 
+                // CookieAuthenticationOptions set with AddCookie.
 
-            } 
-            return Unauthorized("Invalid username or password!");
+                //IsPersistent = true,
+                // Whether the authentication session is persisted across 
+                // multiple requests. When used with cookies, controls
+                // whether the cookie's lifetime is absolute (matching the
+                // lifetime of the authentication ticket) or session-based.
+
+                //IssuedUtc = <DateTimeOffset>,
+                // The time at which the authentication ticket was issued.
+
+                //RedirectUri = <string>
+                // The full path or absolute URI to be used as an http 
+                // redirect response value.
+            };
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProperties);
+            return Ok("Login successfull");
+
+
+
+            //    // 2   take info from input like email and check in db if  we have an existing claims principal for that email
+            //    //if we don't it means the user is not registered => return unregistered => redirect to login
+            //    ClaimsPrincipal principal;
+            //    //instead of setting the principal will use dictionary
+            //    _auth.Users.TryGetValue(user.Email, out principal);
+
+            //    if (principal == null) return StatusCode(500); 
+
+            //    //check based on the claim that the password is correct
+            //    //this will get password from db
+            //    var identity = principal.Identity as ClaimsIdentity; //get identity from principal and cast it as claims identity
+            //    var username = identity.FindFirst(ClaimTypes.Name)?.Value;//if Find first does not return null we will get a alue
+            //    //var password = identity.FindFirst(ClaimTypes.Password)?.Value; //might have 2 do custom claim
+
+            //    //check if username and password match
+            //    if(username == user.Email /* && password == user.Password*/ )
+            //    {
+            //        //1 sign user in
+            //        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            //        return Ok();
+            //    }
+
+            //} 
+            //return Unauthorized("Invalid username or password!");
+
         }
-    [HttpPost("/signOut")]
-    public async Task<IActionResult> Logout()
-    {
-        await HttpContext.SignOutAsync();
-        return Ok ("Sign out successfully!");
+        [HttpPost("/signOut")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Ok("Sign out successfully!");
 
-    }
+        }
 
 
 

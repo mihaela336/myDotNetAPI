@@ -44,9 +44,12 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 //dependency injection TODO: Learn more about how it works
 builder.Services.AddScoped<IChargingSessionRepository, ChargingSessionRepository>();
 builder.Services.AddScoped<IPaymentPlanRepository, PaymentPlanRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IStationRepository, StationRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IUserClaimRepository, UserClaimRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 // builder.Services.AddScoped<ITokenService, TokenService>();
 

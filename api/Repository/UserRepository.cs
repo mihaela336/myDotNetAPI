@@ -21,10 +21,19 @@ namespace api.Repository
             return await _context.Users.Include(c=> c.Transactions).ToListAsync();
         }
 
-        public async Task<List<User>> GetByIdAsync(int id)
+        public async Task<User> GetByEmailAsync(string email)
         {
-            throw new NotImplementedException();
-           //  return await _context.UsersData.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> GetByIdAsync(int id)
+        {
+           // throw new NotImplementedException();
+           return await _context.Users
+                .Include(u=> u.Transactions)
+                .Include(u => u.ChargingSessions)
+                .Include(u=>u.Vehicles)
+                .FirstOrDefaultAsync(u =>u.Id == id);
 
         }
 

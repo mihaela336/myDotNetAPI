@@ -32,7 +32,7 @@ namespace api.Controllers
         }
 
         [HttpGet("/test_Authorised_Mobile")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetDataFromAzure()
         {
 
