@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -22,7 +23,7 @@ namespace api.Service
 
         
     }
-        public string CreateToken(User user)
+        public string CreateToken(User user, IList<string> roles)
         {
             var claims = new List<Claim>
             {
@@ -30,6 +31,8 @@ namespace api.Service
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName)
 
             };
+            claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+
 
             //create signing credential (what kind of encription will be used)
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

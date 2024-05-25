@@ -101,6 +101,12 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("User"));
+});
+
 //dependency injection TODO: Learn more about how it works
 builder.Services.AddScoped<IChargingSessionRepository, ChargingSessionRepository>();
 builder.Services.AddScoped<IPaymentPlanRepository, PaymentPlanRepository>();

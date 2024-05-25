@@ -33,17 +33,20 @@ namespace api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            
             //if user not found
             if (user == null) return Unauthorized("Invalid username!");
 
             var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.Password, false);// false = no lock out faliure
             if (!result.Succeeded) return Unauthorized("Username not found or password incorrect!");
+            var roles = await _userManager.GetRolesAsync(user);
             return Ok(
                 new NewUserDto
                 {
                     Username = user.UserName,
                     Email = user.Email,
-                    Token = _tokenService.CreateToken(user)
+                    Role = roles,
+                    Token = _tokenService.CreateToken(user, roles)
 
                 }
             );
@@ -71,6 +74,7 @@ namespace api.Controllers
                 if (createdUser.Succeeded)
                 {// if user succesfully created assign role
                     var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                    var roles = await _userManager.GetRolesAsync(user);
                     if (roleResult.Succeeded)
                     {
                         return Ok(
@@ -78,7 +82,7 @@ namespace api.Controllers
                             {
                                 Username = user.UserName,
                                 Email = user.Email,
-                                Token = _tokenService.CreateToken(user)
+                                Token = _tokenService.CreateToken(user, roles)
 
                             }
                         );
