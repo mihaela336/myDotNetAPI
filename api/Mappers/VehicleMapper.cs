@@ -15,7 +15,7 @@ namespace api.Mappers
             {
                 Id = vehicleModel.Id,
                 //add user id?
-                UserDataId = vehicleModel.UserDataId,
+                UserId = vehicleModel.UserId,
                 AddedOn = vehicleModel.AddedOn,
                 Producer = vehicleModel.Producer,
                 Model = vehicleModel.Model
@@ -27,7 +27,7 @@ namespace api.Mappers
         {
             return new Vehicle
             {
-                UserDataId = vehicleDto.UserDataId,
+                UserId = vehicleDto.UserId,
                 AddedOn = vehicleDto.AddedOn,//TODO:rename addedON to CreatedOn
                 Producer = vehicleDto.Producer,
                 Model = vehicleDto.Model

@@ -2,24 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Dtos.UserData;
+using api.Dtos.User;
 using api.Models;
 
 namespace api.Mappers
 {
-    public static class UserDataMapper
+    public static class UserMapper
     {
-        public static UserDataDto ToUserDataDto (this UserData userDataModel)
+        public static UserDto ToUserDto (this User userModel)
         {
-            return new UserDataDto
+            return new UserDto
             {
-                Id = userDataModel.Id,
-                AppUserId = userDataModel.AppUserId, //TODO: determine if this should be visible
-                Name = userDataModel.Name,
-                Email = userDataModel.Email,
-                Phone = userDataModel.Phone,
-                Adress = userDataModel.Adress,
-                Transactions = userDataModel.Transactions.Select(c=> c.ToTransactionDto()).ToList()
+                Name = userModel.FullName,
+                Email = userModel.Email,
+                Phone = userModel.Phone,
+                Adress = userModel.Adress,
+                Transactions = userModel.Transactions.Select(c=> c.ToTransactionDto()).ToList()
             };
         }
     }

@@ -13,9 +13,9 @@ namespace api.Models
         public int? StationId {get; set;} //forms fk relationship with db
         public Station? Station {get; set;} 
 
-        //1 to many relationship with userData pt2 TODO: check if working
-        public int? UserDataId {get; set;} //forms fk relationship with db
-        public UserData? UserData {get; set;} 
+        //1 to many relationship with user pt2 TODO: check if working
+        public string? UserId {get; set;} //forms fk relationship with db
+        public User? User {get; set;} 
 
         //TODO: format dateTime, handle input values
 

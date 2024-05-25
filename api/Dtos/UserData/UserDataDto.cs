@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Transaction;
 
-namespace api.Dtos.UserData
+namespace api.Dtos.User
 {
-    public class UserDataDto
+    public class UserDto
     {
         public int Id { get; set; }
         public string AppUserId {get; set;}

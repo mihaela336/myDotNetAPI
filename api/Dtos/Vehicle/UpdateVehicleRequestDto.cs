@@ -8,7 +8,7 @@ namespace api.Dtos.Vehicle
 {
     public class UpdateVehicleRequestDto
     {
-        public int UserDataId {get; set;}
+        public string UserId {get; set;}
         public DateTime AddedOn { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Producer must be under 50 characters")]

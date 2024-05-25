@@ -60,7 +60,7 @@ namespace api.Controllers
   
         [HttpGet("user/{userId:int}")]
 
-        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
+        public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
             var transactions = await _transactionRepo.GetByUserIdAsync(userId);
             if (transactions == null)
