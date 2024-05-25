@@ -3,7 +3,7 @@ import Card from '../Card/Card'
 
 interface Props {}
 
-const CardList = (props: Props) => {
+const CardList : React.FC<Props> = (props: Props) : JSX.Element => {
   return (
     <div>
         < Card stationName="Station 1" stationStatus='Available' stationAdress='Adress of station 1'/>

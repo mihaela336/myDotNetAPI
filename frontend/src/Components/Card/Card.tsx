@@ -7,7 +7,7 @@ interface Props {
   stationAdress: string;
 }
 
-const Card = ({stationName, stationStatus, stationAdress} : Props) => {
+const Card: React.FC<Props> = ({stationName, stationStatus, stationAdress} : Props) : JSX.Element=> {
   return (
     <div className="card">
         <img
