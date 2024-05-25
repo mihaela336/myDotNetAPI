@@ -1,9 +1,13 @@
 import React from 'react'
 import "./Card.css"
 
-type Props = {}
+interface Props {
+  stationName: string;
+  stationStatus: string;
+  stationAdress: string;
+}
 
-const Card = (props: Props) => {
+const Card = ({stationName, stationStatus, stationAdress} : Props) => {
   return (
     <div className="card">
         <img
@@ -11,8 +15,9 @@ const Card = (props: Props) => {
         alt="Image"    
         />
         <div className="details">
-            <h2>Station</h2>
-            <p>status</p>
+            <h2>{stationName}</h2>
+            <p>{stationStatus}</p>
+            <p>{stationAdress}</p>
         </div>
         <p className="info">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et cupiditate dicta incidunt esse corporis rerum natus quia velit quis neque. Maiores optio, consequatur excepturi totam mollitia laboriosam. Esse, et hic?</p>
         </div>
