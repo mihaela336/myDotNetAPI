@@ -5,13 +5,18 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Account;
+using api.Dtos.Transaction;
 using api.Dtos.User;
+using api.Interfaces;
+using api.Mappers;
 using api.Models;
+using Azure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -20,22 +25,46 @@ namespace api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly CustomAuthService _auth;
-        public AccountController(CustomAuthService auth)
+        private readonly ApplicationDBContext _context;
+        private readonly IUserRepository _userRepo;
+        public AccountController(CustomAuthService auth, ApplicationDBContext context, IUserRepository userRepo)
         {
             _auth = auth;
+            _context = context;
+            _userRepo = userRepo;
+        }
+        //Get User by id //TODO determine if it should be moved to userController
+        [HttpGet("{id:int}")] 
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            //var transaction = await _context.Transactions.FindAsync(id); //before repo refactoring
+            var user = await _userRepo.GetByIdAsync(id);
+            if (user== null)
+            {
+                //NotFund is a form of IActionResult
+                //it will provide the not found request(?)
+                //TODO: learn about IACtionResult
+                return NotFound();
+
+            }
+            //update after mapper was created
+            return Ok(user.ToUserDto());
         }
 
 
         [HttpPost("/register")]
-        public async Task<IActionResult> Register(UserDto userDto)
+        public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
         {
             try
-            {
+            {                //when registering an user and signining him in 
+                // 1 check if all user info is correct
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+                var userModel = registerUserDto.ToUserFromRegisterDto();
+                await _userRepo.CreateAsync(userModel);
+                return CreatedAtAction(nameof(GetById), new { id = userModel.Id }, userModel.ToUserDto());
 
-                //when registering an user and signining him in 
-                // 1 check if all user info is correct
+
                 //2 add user to the customAuthenticationService
                 //3 sign the user in that has a few steps
                 //3a create an instance of an object called claimsIdentity
@@ -45,18 +74,35 @@ namespace api.Controllers
                 //User that httpContext uses is of type claims principal
                 //final step is to sign the user in => when the netCore knows we will want to sign the user in it will set the cookie for that user
 
-                var user = new User();
-                user.Id = 1;
-                user.Name = "Mihaela";
-                user.Email = "test@email.com";
-                user.Phone = "0000 000 000";
-                user.Adress = "test adress of user 1";
+                //TODO: implement check to verify that user exist
+                //example:
+                //if (await _context.Users.AnyAsync(u => u.Username == registerDto.Username))
+                //{
+                //    return BadRequest("Username already exists.");
+                //}
+
+                // create new user
+                //var user = new User();
+                //{
+                //    user.Email= registerUserDto.Email;
+                //    user.Name= registerUserDto.Name;
+                //    user.Password= registerUserDto.Password;
+                //    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDto.Password);
+                //    user.Phone = registerUserDto.Phone;
+                //    user.Adress = registerUserDto.Adress;
+                //}
+
+                //user.Id = 1;
+                //user.Name = "Mihaela";
+                //user.Email = "test@email.com";
+                //user.Phone = "0000 000 000";
+                //user.Adress = "test adress of user 1";
 
                 // 2a create list of claims
 
                 var claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.Name, user.Email));
-                claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                claims.Add(new Claim(ClaimTypes.Name, userModel.Email));
+                claims.Add(new Claim(ClaimTypes.Email, userModel.Email));
                 // claims.Add(new Claim(ClaimTypes."password", user.Password)); //when checking the user we will have to check 
                 //that the password provided in the input is the password in the db
                 // claims.Add(new Claim(ClaimTypes.Role, user.Role));
@@ -71,7 +117,7 @@ namespace api.Controllers
                 var principal = new ClaimsPrincipal(claimsIdentity);
 
                 //2 d add the principal to the customAuthService (key: value pair is usr.Email-Principal)
-                _auth.Users.Add(user.Email, principal); //for repository pattern will not be using dictionary, cre
+                _auth.Users.Add(userModel.Email, principal); //for repository pattern will not be using dictionary, cre
 
                 //3 sign tue user in
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
