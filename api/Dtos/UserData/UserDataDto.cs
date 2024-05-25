@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Transaction;
 
-namespace api.Dtos.UserData
+namespace api.Dtos.User
 {
-    public class UserDataDto
+    public class UserDto
     {
-        public int Id { get; set; }
-        public string AppUserId {get; set;}
+        public string Id { get; set; }
+      //  public string UserId {get; set;}
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;

@@ -13,7 +13,7 @@ namespace api.Interfaces
 
         Task<ChargingSession?> GetByIdAsync(int id);
 
-        Task<List<ChargingSession?>> GetByUserIdAsync(int userId);
+        Task<List<ChargingSession?>> GetByUserIdAsync(string userId);
         Task<ChargingSession> CreateAsync(ChargingSession chargingSessionModel);
         Task<ChargingSession?> UpdateAsync(int id, UpdateChargingSessionRequestDto chargingSessionnDto);
         Task<ChargingSession?> DeleteAsync(int id);

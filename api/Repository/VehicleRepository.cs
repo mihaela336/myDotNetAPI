@@ -47,9 +47,9 @@ namespace api.Repository
             return await _context.Vehicles.FindAsync(id);
         }
 
-        public async Task<List<Vehicle>> GetByUserIdAsync(int userId)
+        public async Task<List<Vehicle>> GetByUserIdAsync(string userId)
         {
-            return await _context.Vehicles.Where(v=> v.UserDataId == userId).ToListAsync();
+            return await _context.Vehicles.Where(v=> v.UserId == userId).ToListAsync();
         }
 
         public async Task<Vehicle?> UpdateAsync(int id, UpdateVehicleRequestDto vehicleDto)
@@ -60,7 +60,7 @@ namespace api.Repository
                 return null;
             }
 
-            existingVehicle.UserDataId = vehicleDto.UserDataId;
+            existingVehicle.UserId = vehicleDto.UserId;
             existingVehicle.AddedOn = vehicleDto.AddedOn;
             existingVehicle.Producer = vehicleDto.Producer;
             existingVehicle.Model = vehicleDto.Model;

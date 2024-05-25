@@ -8,22 +8,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("api/userData")]
+    [Route("api/user")]
     [ApiController]
-    public class UserDataController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUserDataRepository _userDataRepo;
-        public UserDataController(IUserDataRepository userDataRepo)
+        private readonly IUserRepository _userRepo;
+        public UserController(IUserRepository userRepo)
         {
-            _userDataRepo =userDataRepo;
+            _userRepo =userRepo;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var userData = await _userDataRepo.GetAllAsync();
-            var userDataDto = userData.Select(s => s.ToUserDataDto());
-            return Ok(userDataDto);
+            var user = await _userRepo.GetAllAsync();
+            var userDto = user.Select(s => s.ToUserDto());
+            return Ok(userDto);
         }
     }
 }

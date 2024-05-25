@@ -53,7 +53,7 @@ namespace api.Controllers
   
         [HttpGet("user/{userId:int}")]
 
-        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
+        public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
             var vehicles = await _vehicleRepo.GetByUserIdAsync(userId);
             if (vehicles == null)

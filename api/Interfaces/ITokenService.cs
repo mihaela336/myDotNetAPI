@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,10 +6,8 @@ using api.Models;
 
 namespace api.Interfaces
 {
-    public interface IUserRepository
+    public interface ITokenService
     {
-        Task<List<User>> GetAllAsync();
-
-        Task<List<User>> GetByIdAsync(int id);
+        string CreateToken(User user, IList<string> roles);
     }
 }
