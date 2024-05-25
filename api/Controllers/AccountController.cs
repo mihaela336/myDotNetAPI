@@ -63,6 +63,7 @@ namespace api.Controllers
                 {
                     UserName = registerDto.Username,
                     Email = registerDto.Email,
+                    //TODO add all user data for registration
 
                 };
 

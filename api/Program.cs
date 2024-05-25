@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//config swahher to use jwt
+//config swagger to use jwt
  builder.Services.AddSwaggerGen(option =>
  {
      option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
@@ -75,28 +75,31 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
 
 // will use jwt instead of cookies
 //add schemes
-// builder.Services.AddAuthentication(options => { //TODO: learn what this entire section does
-//    options.DefaultAuthenticateScheme =
-//    options.DefaultChallengeScheme =
-//    options.DefaultForbidScheme =
-//    options.DefaultScheme =
-//    options.DefaultSignInScheme =
-//    options.DefaultSignOutScheme =JwtBearerDefaults.AuthenticationScheme;
+builder.Services.AddAuthentication(options =>
+{ //TODO: learn what this entire section does
+    options.DefaultAuthenticateScheme =
+    options.DefaultChallengeScheme =
+    options.DefaultForbidScheme =
+    options.DefaultScheme =
+    options.DefaultSignInScheme =
+    options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
 
 
-// }).AddJwtBearer(options =>{
-//    options.TokenValidationParameters = new TokenValidationParameters{
-//        ValidateIssuer = true,
-//        ValidIssuer = builder.Configuration["JWT:Issuer"],
-//        ValidateAudience = true,
-//        ValidAudience = builder.Configuration["JWT:Audience"],
-//        ValidateIssuerSigningKey = true,
-//        IssuerSigningKey = new SymmetricSecurityKey(
-//            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
-//        )
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+        )
 
-//    };
-// });
+    };
+});
 
 //dependency injection TODO: Learn more about how it works
 builder.Services.AddScoped<IChargingSessionRepository, ChargingSessionRepository>();
