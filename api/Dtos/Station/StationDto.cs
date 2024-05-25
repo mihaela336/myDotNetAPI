@@ -15,6 +15,8 @@ namespace api.Dtos.Station
         [MinLength(5, ErrorMessage = "Name must be 5 characters")]
         [MaxLength(50, ErrorMessage = "Name must be under 50 characters")]
         public string Name {get; set;} = string.Empty;
+        [Required]
+        public string Status { get; set; } = string.Empty;//status: Available/Reserved
 
         [Required]
         [MinLength(10, ErrorMessage = "Adress must be at least 10 characters")]
