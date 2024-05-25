@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Transaction;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ namespace api.Controllers
 
         // get all transactions
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {//_context.Transactions.ToList(); = deffered(?) execution
          //_context.Transactions returns a list like object if u add TOList - it will create the sql to go out to db and retrieve data
@@ -59,6 +61,7 @@ namespace api.Controllers
         }
   
         [HttpGet("user/{userId:int}")]
+        [Authorize(Roles = "Admin, User")]
 
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
@@ -79,6 +82,7 @@ namespace api.Controllers
 
         //part 6. add post method
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Create([FromBody] CreateTransactionRequestDto transactionDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreateTransactionRequest transactionDto because the user will not have to input all the data (aka the entire model)
@@ -92,6 +96,7 @@ namespace api.Controllers
         
         [HttpPut]
         [Route ("{id:int}")]
+        [Authorize(Roles = "Admin")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update ([FromRoute] int id, [FromBody] UpdateTransactionRequestDto updateDto)
         {
@@ -111,6 +116,7 @@ namespace api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] int id )
         {
             var transactionModel = await _transactionRepo.DeleteAsync(id);

@@ -22,6 +22,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var chargingSessions = await _chargingSessionRepo.GetAllAsync();
@@ -59,6 +60,7 @@ namespace api.Controllers
 
         //get charging session by id
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "Admin, User")]
         //.net will use model-binding to extract the string from [HttpGet("{id}")]
         //and turn it into int and pass it into code
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -79,6 +81,7 @@ namespace api.Controllers
 
         //part 6. add post method
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Create([FromBody] CreateChargingSessionRequestDto chargingSessionDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreatechargingSessionRequest chargingSessionDto because the user will not have to input all the data (aka the entire model)
@@ -92,6 +95,7 @@ namespace api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         [Route("{id:int}")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateChargingSessionRequestDto updateDto)
@@ -111,6 +115,7 @@ namespace api.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

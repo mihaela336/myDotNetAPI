@@ -9,8 +9,6 @@ namespace api.Dtos.Account
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public IList<string> Role { get; set; }
-
         public string Token { get; set; }
 
     }

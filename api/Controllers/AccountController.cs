@@ -45,7 +45,6 @@ namespace api.Controllers
                 {
                     Username = user.UserName,
                     Email = user.Email,
-                    Role = roles,
                     Token = _tokenService.CreateToken(user, roles)
 
                 }
@@ -66,6 +65,11 @@ namespace api.Controllers
                 {
                     UserName = registerDto.Username,
                     Email = registerDto.Email,
+                    Password= registerDto.Password,
+                    FullName= registerDto.FullName,
+                    Phone   = registerDto.Phone,
+                    Adress = registerDto.Adress,
+                 //   PaymentPlan =   registerDto.PaymentPlan,
                     //TODO add all user data for registration
 
                 };
