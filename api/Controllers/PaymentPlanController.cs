@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.PaymentPlan;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -25,6 +26,7 @@ namespace api.Controllers
 
         //get all payment plans
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var paymentPlan = await _paymentPlanRepo.GetAllAsync();
@@ -34,6 +36,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "Admin, User")]
         //.net will use model-binding to extract the string from [HttpGet("{id}")]
         //and turn it into int and pass it into code
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -54,6 +57,7 @@ namespace api.Controllers
 
         //part 6. add post method
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreatePaymentPlanRequestDto paymentPlanDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreatepaymentPlanRequest paymentPlanDto because the user will not have to input all the data (aka the entire model)
@@ -68,6 +72,7 @@ namespace api.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [Authorize(Roles = "Admin")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePaymentPlanRequestDto updateDto)
         {
@@ -87,6 +92,7 @@ namespace api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var paymentPlanModel = await _paymentPlanRepo.DeleteAsync(id);

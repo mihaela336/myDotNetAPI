@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Vehicle;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -24,6 +25,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var vehicles = await _vehicleRepo.GetAllAsync();
@@ -33,6 +35,7 @@ namespace api.Controllers
 
          //get vehicle by id
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "Admin, User")]
         //.net will use model-binding to extract the string from [HttpGet("{id}")]
         //and turn it into int and pass it into code
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -52,6 +55,7 @@ namespace api.Controllers
         }
   
         [HttpGet("user/{userId:int}")]
+        [Authorize(Roles = "Admin, User")]
 
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
@@ -72,6 +76,7 @@ namespace api.Controllers
 
         //part 6. add post method
         [HttpPost]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Create([FromBody] CreateVehicleRequestDto vehicleDto)
         //use from body because data is not sent in the url like a query param but is sent as json into the body of the request
         // uses CreatevehicleRequest vehicleDto because the user will not have to input all the data (aka the entire model)
@@ -85,6 +90,7 @@ namespace api.Controllers
         
         [HttpPut]
         [Route ("{id:int}")]
+        [Authorize(Roles = "Admin, User")]
         //Lpt create separate dtos for each separate endpoint because each of them is going to be different
         public async Task<IActionResult> Update ([FromRoute] int id, [FromBody] UpdateVehicleRequestDto updateDto)
         {
@@ -104,6 +110,7 @@ namespace api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> Delete([FromRoute] int id )
         {
             var vehicleModel = await _vehicleRepo.DeleteAsync(id);

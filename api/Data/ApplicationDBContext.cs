@@ -44,6 +44,7 @@ namespace api.Data
             modelBuilder.Entity<IdentityUser>().Ignore(c => c.EmailConfirmed)
                                             .Ignore(c => c.SecurityStamp)
                                             .Ignore(c => c.ConcurrencyStamp)
+                                            .Ignore(c => c.PhoneNumber)
                                             .Ignore(c => c.PhoneNumberConfirmed)
                                             .Ignore(c => c.AccessFailedCount)
                                             .Ignore(c => c.LockoutEnd)
