@@ -15,6 +15,7 @@ namespace api.Mappers
             {
                 Id = stationModel.Id,
                 Name = stationModel.Name,
+                Status= stationModel.Status,
                 Adress = stationModel.Adress
             };
         }
@@ -24,6 +25,7 @@ namespace api.Mappers
             return new Station
             {
                 Name = stationDto.Name,
+                Status= stationDto.Status,
                 Adress= stationDto.Adress
  
             };
