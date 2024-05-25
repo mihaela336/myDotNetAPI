@@ -46,9 +46,20 @@ option.AddSecurityRequirement(new OpenApiSecurityRequirement
      });
  });
 
+//allow CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
+
 builder.Services.AddControllers().AddNewtonsoftJson(options => {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
+
 
 //connect to local sqlserver
 
@@ -128,6 +139,9 @@ app.UseDeveloperExceptionPage();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// Apply the CORS policy globally
+app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
