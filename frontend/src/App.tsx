@@ -12,7 +12,7 @@ function App() {
   const [searchResult, setSearchResult] = useState<CreateStationRequestDto[]>([]);
   const [serverError, setServerError] = useState<string | null>(null) ;
 
-  const handleChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
+  const handleSearchChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
       setSearch(e.target.value);
   }
 
@@ -21,7 +21,8 @@ function App() {
     console.log(e);
   }
 
-  const onClick = async (e: SyntheticEvent) =>{
+  const onSearchSubmit = async (e: SyntheticEvent) =>{
+    e.preventDefault();
     const result = await  searchStations(search);
     if (typeof result === "string"){
       setServerError(result);
@@ -34,7 +35,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Search onClick={onClick} search={search} handleChange={handleChange}/>
+      <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange}/>
       <CardList searchResults = {searchResult} onChargingSessionCreate={onChargingSessionCreate}/>
       {serverError &&<div>{serverError}</div>}
 
