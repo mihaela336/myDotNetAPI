@@ -1,5 +1,6 @@
 export interface CreateStationRequestDto {
     name: string;
+    status: string;
     adress: string;
 }
 export interface CompanySearch {
