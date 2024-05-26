@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { searchStations } from './api';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './Components/Routes/Routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +13,7 @@ const root = ReactDOM.createRoot(
 console.log(searchStations("1"))
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

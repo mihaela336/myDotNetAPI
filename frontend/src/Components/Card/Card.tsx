@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from 'react'
 import "./Card.css"
 import { CreateStationRequestDto } from '../../station';
 import AddChargingSession from '../ManageChargingSessions/AddChargingSession/AddChargingSession';
+import { Link } from 'react-router-dom';
 
 interface Props {
   id: string;
@@ -17,9 +18,9 @@ const Card: React.FC<Props> = ({id, searchResult, onChargingSessionCreate} : Pro
     key={id}
     id={id}
   >
-    <h2 className="font-bold text-center text-veryDarkViolet md:text-left">
+    <Link to="/station/${searchResult.name}" className="font-bold text-center text-veryDarkViolet md:text-left">
       {searchResult.name} ({searchResult.name})
-    </h2>
+    </Link>
     <p className="text-veryDarkBlue">{searchResult.status}</p>
     <p className="font-bold text-veryDarkBlue">
     
