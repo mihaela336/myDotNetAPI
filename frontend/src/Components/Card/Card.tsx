@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react'
 import "./Card.css"
 import { CreateStationRequestDto } from '../../station';
-import AddChargingSession from '../ManageStations/AddChargingSession/AddChargingSession';
+import AddChargingSession from '../ManageChargingSessions/AddChargingSession/AddChargingSession';
 
 interface Props {
   id: string;
