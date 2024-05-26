@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import Card from '../Card/Card'
 import { CreateStationRequestDto } from '../../station';
 import {v4 as uuidv4} from "uuid";
@@ -6,14 +6,15 @@ import {v4 as uuidv4} from "uuid";
 
 interface Props {
   searchResults: CreateStationRequestDto[];
+  onChargingSessionCreate: (e: SyntheticEvent)=>void;
 }
 
-const CardList : React.FC<Props> = ({searchResults}: Props) : JSX.Element => {
+const CardList : React.FC<Props> = ({searchResults, onChargingSessionCreate}: Props) : JSX.Element => {
   return (
     <>
   {searchResults.length >0 ?(
     searchResults.map((result)=>{
-      return <Card id ={result.name} key={uuidv4()} searchResult={result} />;
+      return <Card id ={result.name} key={uuidv4()} searchResult={result} onChargingSessionCreate={onChargingSessionCreate} />;
 
     })
   ):(
