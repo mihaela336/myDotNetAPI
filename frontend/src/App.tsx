@@ -10,11 +10,17 @@ import { searchStations } from './api';
 function App() {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CreateStationRequestDto[]>([]);
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<string | null>(null) ;
+
   const handleChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
       setSearch(e.target.value);
-      console.log(e);
   }
+
+  const onChargingSessionCreate =(e: SyntheticEvent)=>{
+    e.preventDefault();
+    console.log(e);
+  }
+
   const onClick = async (e: SyntheticEvent) =>{
     const result = await  searchStations(search);
     if (typeof result === "string"){
@@ -29,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <Search onClick={onClick} search={search} handleChange={handleChange}/>
-      <CardList searchResults = {searchResult}/>
+      <CardList searchResults = {searchResult} onChargingSessionCreate={onChargingSessionCreate}/>
       {serverError &&<div>{serverError}</div>}
 
     </div>

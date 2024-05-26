@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import "./Card.css"
 import { CreateStationRequestDto } from '../../station';
+import AddChargingSession from '../ManageStations/AddChargingSession/AddChargingSession';
 
 interface Props {
   id: string;
   searchResult: CreateStationRequestDto;
+  onChargingSessionCreate: (e: SyntheticEvent)=> void;
 
 }
 
-const Card: React.FC<Props> = ({id, searchResult} : Props) : JSX.Element=> {
+const Card: React.FC<Props> = ({id, searchResult, onChargingSessionCreate} : Props) : JSX.Element=> {
   return (
     <div className="card">
         <img
@@ -20,7 +22,10 @@ const Card: React.FC<Props> = ({id, searchResult} : Props) : JSX.Element=> {
             <p>{searchResult.status}</p>
 
         </div>
-        <p className="info">{searchResult.adress}</p>
+        <p className="info">
+          {searchResult.adress}
+          </p>
+          <AddChargingSession onChargingSessionCreate={onChargingSessionCreate} name ={searchResult.name}/>
         </div>
   )
 }
