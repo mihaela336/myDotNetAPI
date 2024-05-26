@@ -1,13 +1,14 @@
 import React from 'react'
 import "./Card.css"
+import { CreateStationRequestDto } from '../../station';
 
 interface Props {
-  stationName: string;
-  stationStatus: string;
-  stationAdress: string;
+  id: string;
+  searchResult: CreateStationRequestDto;
+
 }
 
-const Card: React.FC<Props> = ({stationName, stationStatus, stationAdress} : Props) : JSX.Element=> {
+const Card: React.FC<Props> = ({id, searchResult} : Props) : JSX.Element=> {
   return (
     <div className="card">
         <img
@@ -15,11 +16,11 @@ const Card: React.FC<Props> = ({stationName, stationStatus, stationAdress} : Pro
         alt="Image"    
         />
         <div className="details">
-            <h2>{stationName}</h2>
-            <p>{stationStatus}</p>
-            <p>{stationAdress}</p>
+            <h2>{searchResult.name}</h2>
+            <p>{searchResult.status}</p>
+
         </div>
-        <p className="info">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et cupiditate dicta incidunt esse corporis rerum natus quia velit quis neque. Maiores optio, consequatur excepturi totam mollitia laboriosam. Esse, et hic?</p>
+        <p className="info">{searchResult.adress}</p>
         </div>
   )
 }

@@ -1,15 +1,24 @@
 import React from 'react'
 import Card from '../Card/Card'
+import { CreateStationRequestDto } from '../../station';
+import {v4 as uuidv4} from "uuid";
 
-interface Props {}
 
-const CardList : React.FC<Props> = (props: Props) : JSX.Element => {
+interface Props {
+  searchResults: CreateStationRequestDto[];
+}
+
+const CardList : React.FC<Props> = ({searchResults}: Props) : JSX.Element => {
   return (
-    <div>
-        < Card stationName="Station 1" stationStatus='Available' stationAdress='Adress of station 1'/>
-        < Card stationName="Station 2" stationStatus='Available' stationAdress='Adress of station 2'/>
-        < Card stationName="Station 3" stationStatus='Available' stationAdress='Adress of station 3'/>
-    </div>
+    <>
+  {searchResults.length >0 ?(
+    searchResults.map((result)=>{
+      return <Card id ={result.name} key={uuidv4()} searchResult={result} />;
+
+    })
+  ):(
+    <h1>No result</h1>
+  )}/</>
   )
 }
 
