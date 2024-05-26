@@ -4,11 +4,13 @@ import CardList from './Components/CardList/CardList';
 import Search from './Components/Search/Search';
 import { CreateStationRequestDto } from './station';
 import { searchStations } from './api';
+import ListChargingSessions from './Components/ManageChargingSessions/ListChargingSessions/ListChargingSessions';
 
 
 
 function App() {
   const [search, setSearch] = useState<string>("");
+  const [chargingSessionValues, setChargingSessionValues] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<CreateStationRequestDto[]>([]);
   const [serverError, setServerError] = useState<string | null>(null) ;
 
@@ -16,9 +18,12 @@ function App() {
       setSearch(e.target.value);
   }
 
-  const onChargingSessionCreate =(e: SyntheticEvent)=>{
+  const onChargingSessionCreate =(e: any)=>{
     e.preventDefault();
-    console.log(e);
+    const exists = chargingSessionValues.find((value)=> value === e.target[0].value);
+    if(exists) return;
+    const updateChargingSession =[...chargingSessionValues, e.target[0].value];
+    setChargingSessionValues(updateChargingSession);
   }
 
   const onSearchSubmit = async (e: SyntheticEvent) =>{
@@ -36,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange}/>
+      <ListChargingSessions chargingSessionValues={chargingSessionValues}/>
       <CardList searchResults = {searchResult} onChargingSessionCreate={onChargingSessionCreate}/>
       {serverError &&<div>{serverError}</div>}
 
