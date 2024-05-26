@@ -5,6 +5,8 @@ import Search from './Components/Search/Search';
 import { CreateStationRequestDto } from './station';
 import { searchStations } from './api';
 import ListChargingSessions from './Components/ManageChargingSessions/ListChargingSessions/ListChargingSessions';
+import Navbar from './Components/Navbar/Navbar';
+import Hero from './Components/Hero/Hero';
 
 
 
@@ -49,7 +51,13 @@ function App() {
   };
   return (
     <div className="App">
-      <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
+      < Navbar />
+      <Hero/>
+
+      <Search
+        onSearchSubmit={onSearchSubmit}
+        search={search}
+        handleSearchChange={handleSearchChange} />
       <ListChargingSessions
         chargingSessionValues={chargingSessionValues}
         onChargingSessionDelete={onChargingSessionDelete} />
