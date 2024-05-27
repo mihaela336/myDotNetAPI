@@ -18,7 +18,7 @@ const Card: React.FC<Props> = ({id, searchResult, onChargingSessionCreate} : Pro
     key={id}
     id={id}
   >
-    <Link to="/station/${searchResult.name}" className="font-bold text-center text-veryDarkViolet md:text-left">
+    <Link to={`/station/${searchResult.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
       {searchResult.name} ({searchResult.name})
     </Link>
     <p className="text-veryDarkBlue">{searchResult.status}</p>

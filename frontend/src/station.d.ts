@@ -1,8 +1,17 @@
 export interface CreateStationRequestDto {
+  id: int;
     name: string;
     status: string;
     adress: string;
 }
+export interface StationDetails {
+  id: int;
+  name: string;
+  status: string;
+  adress: string;
+}
+
+
 export interface CompanySearch {
     currency: string;
     exchangeShortName: string;
