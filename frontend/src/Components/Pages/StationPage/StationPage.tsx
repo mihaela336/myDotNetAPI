@@ -4,6 +4,7 @@ import { CreateStationRequestDto, StationDetails } from '../../../station';
 import { getStationDetails } from '../../../api';
 import Sidebar from '../../Sidebar/Sidebar';
 import StationDashboard from '../../StationDashboard/StationDashboard';
+import Tile from '../../Tile/Tile';
 
 interface Props {}
 
@@ -41,7 +42,7 @@ const [station, setStation] = useState<StationDetails | null>(null);
     <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
 
          <Sidebar/>
-         <StationDashboard/>
+         <StationDashboard><Tile title="Station Name" subTitle={station.name}/></StationDashboard>
 
 
 
