@@ -65,7 +65,6 @@ namespace api.Controllers
                 {
                     UserName = registerDto.Username,
                     Email = registerDto.Email,
-                    Password= registerDto.Password,
                     FullName= registerDto.FullName,
                     Phone   = registerDto.Phone,
                     Adress = registerDto.Adress,
