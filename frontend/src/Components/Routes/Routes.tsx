@@ -12,6 +12,7 @@ import ChargingSessions from "../ChargingSessions/ChargingSessions";
 import DesignPage from "../Pages/DesignPage/DesignPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
     {
@@ -21,11 +22,12 @@ export const router = createBrowserRouter([
             { path: "", element: <HomePage /> },
             { path: "login", element: <LoginPage /> },
             { path: "register", element: <RegisterPage /> },
-            { path: "search", element: <SearchPage /> },
-            { path: "chargingSession", element: <ChargingSessionPage /> },
+
+            { path: "search", element: <ProtectedRoute><SearchPage /> </ProtectedRoute>},
+            { path: "chargingSession", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute>},
             {
                 path: "station/:ticker",
-                element: <StationPage />,
+                element: <ProtectedRoute><StationPage /></ProtectedRoute>,
                 children: [
 
                     { path: "", element: <HomePage /> },
@@ -34,10 +36,10 @@ export const router = createBrowserRouter([
                 ]
             },
 
-            { path: "transaction", element: <TransactionPage /> },
-            { path: "user", element: <UserPage /> },
-            { path: "paymentPlan", element: <PaymentPlanPage /> },
-            { path: "designGuide", element: <DesignPage /> },
+            { path: "transaction", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
+            { path: "user", element:<ProtectedRoute> <UserPage /> </ProtectedRoute>},
+            { path: "paymentPlan", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute>},
+            { path: "designGuide", element: <ProtectedRoute><DesignPage /></ProtectedRoute> },
 
         ]
 
