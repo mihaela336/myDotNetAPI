@@ -1,26 +1,15 @@
 import React from 'react'
 import { TestDataCompany } from '../Table/TestData'
 
-type Props = {}
+type Props = {
+    config: any;
+    data: any;
 
-const data= TestDataCompany[0];
-type Station = typeof data;
+}
 
-const config =[
-    {
-        label: "Station namme",
-        render: (station:Station) => station.companyName,
-        subTitle: "maybe add station adress here",
-    },
-    {
-        label: "Station name",
-        render: (station:Station) => station.companyName,
-        subTitle: "maybe add station adress here",
-    },
-]
 
-const RatioList = (props: Props) => {
-    const renderedRows = config.map(row => {
+const RatioList = ({config, data}: Props) => {
+    const renderedRows = config.map((row: any) => {
         return(
             <li className="py-3 sm:py-4">
             <div className="flex items-center space-x-4">
@@ -40,7 +29,7 @@ const RatioList = (props: Props) => {
         );
     })
   return (
-    <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
+    <div className="bg-white shadow rounded-lg  ml-4 mt 4 mb-4 p-4 sm:p-6 h-full">
         <ul className="divide-y divided-gray-200"> {renderedRows}</ul>
 
     </div>

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CreateStationRequestDto, StationDetails } from "./station"
+import { CreateStationRequestDto, StationDetails, StationKeyMetrics } from "./station"
 interface SearchResponse {
     data: CreateStationRequestDto[];
 
@@ -27,4 +27,30 @@ export const getStationDetails = async (query: string) => {
     } catch (error: any) {
         console.log(" error message from API: ", error.message);
     }
+}
+
+export const getKeyMetrics = async(query:string)=>{
+    try{
+        const data = await axios.get<StationKeyMetrics[]>(`http://localhost:5220/api/station`);
+        return data;
+
+    }
+    catch (error:any){
+        console.log("error message: ", error.message);
+
+    };
+    
+}
+
+export const getTransactions = async(query:string)=>{
+    try{
+        const data = await axios.get<StationDetails[]>(`http://localhost:5220/api/station`);
+        return data;
+
+    }
+    catch (error:any){
+        console.log("error message: ", error.message);
+
+    };
+    
 }

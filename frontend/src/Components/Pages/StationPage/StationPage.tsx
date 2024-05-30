@@ -42,7 +42,7 @@ const [station, setStation] = useState<StationDetails | null>(null);
     <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
 
          <Sidebar/>
-         <StationDashboard><Tile title="Station Name" subTitle={station.name}/></StationDashboard>
+         <StationDashboard ticker={ticker!}><Tile title="Station Name" subTitle={station.name}/></StationDashboard>
 
 
 
