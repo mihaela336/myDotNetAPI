@@ -20,12 +20,16 @@ export const loginAPI= async (username: string, password: string)=>{
 };
 
 //add al my fieldf from registerDto
-export const registerAPI= async (email: string, username: string, password: string)=>{
+export const registerAPI= async (email: string, username: string, password: string, fullName: string, phone: string, adress: string)=>{
     try{
         const data =  await axios.post<UserProfileToken>(api+"account/register",{
             email: email,
             username: username,
             password: password,
+            fullName: fullName,
+            phone: phone,
+            adress: adress,
+
         });
         return data;
 

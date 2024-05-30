@@ -9,7 +9,7 @@ import axios from "axios";
 type UserContextType = {
     user: UserProfile | null;
     token: string | null;
-    registerUser:(email:string, username: string, password: string)=>void;
+    registerUser:(email:string, username: string, password: string, fullName: string, phone: string, adress: string)=>void;
     loginUser:(username: string, password:string)=>void;
     logout:()=>void;
     isLoggedIn: ()=>boolean;
@@ -39,9 +39,9 @@ export const UserProvider = ({children}: Props)=>{
     },[]);
 
     //actual register function @_@
-    const registerUser = async (email: string, username: string, password: string)=>{
+    const registerUser = async (email: string, username: string, password: string, fullName: string, phone: string, adress: string)=>{
         //reach into API endpoint
-        await registerAPI (email, username, password).then((res)=>{
+        await registerAPI (email, username, password,fullName, phone, adress ).then((res)=>{
             if (res){
                 localStorage.setItem("token", res.data.token);
                 //create userObject to store in localStorage
