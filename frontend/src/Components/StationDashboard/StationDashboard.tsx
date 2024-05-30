@@ -4,9 +4,10 @@ import { Outlet } from 'react-router-dom'
 
 interface Props {
     children:React.ReactNode;
+    ticker:string;
 }
 
-const StationDashboard = ({children}: Props) => {
+const StationDashboard = ({children, ticker}: Props) => {
   return (
     <div className="relative md:ml-64 bg-blueGray-100 w-full">
 
@@ -17,7 +18,7 @@ const StationDashboard = ({children}: Props) => {
         <div>
 
           <div className="flex flex-wrap">{children} </div>
-          <div className="flex flex-wrap">{<Outlet/>} </div>
+          <div className="flex flex-wrap">{<Outlet context={ticker}/>} </div>
 
         </div>
 
