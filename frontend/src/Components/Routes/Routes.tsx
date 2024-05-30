@@ -10,6 +10,7 @@ import PaymentPlanPage from "../Pages/PaymentPlanPage/PaymentPlanPage";
 import Transactions from "../Transactions/Transactions";
 import ChargingSessions from "../ChargingSessions/ChargingSessions";
 import DesignPage from "../Pages/DesignPage/DesignPage";
+import LoginPage from "../Pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
         element: <App />,
         children: [
             { path: "", element: <HomePage /> },
+            { path: "login", element: <LoginPage /> },
             { path: "search", element: <SearchPage /> },
             { path: "chargingSession", element: <ChargingSessionPage /> },
             {

@@ -14,7 +14,7 @@ const Hero = (props: Props) => {
               Smart solutions for EV's
               </h1>
               <p className="text-2xl text-center text-gray-400 lg:max-w-md lg:text-left">
-              Let's drive a sustainable and future together. 
+              Let's drive a sustainable future together. 
               </p>
               <div className="mx-auto lg:mx-0">
                 <Link
