@@ -5,9 +5,25 @@ interface SearchResponse {
 
 }
 
+//call get all method from api
+export const getAll = async (query: string) => {
+    try {
+        const data = await axios.get<SearchResponse>('http://localhost:5220/api/user/');
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log(" error message: ", error.message);
+            return error.message;
+        } else {
+            console.log("unexpected error: ", error);
+            return "An unexpected error has occured";
+        }
+    }
+}
+
 export const searchStations = async (query: string) => {
     try {
-        const data = await axios.get<SearchResponse>('http://localhost:5220/test_Authorised_Mobile_user');
+        const data = await axios.get<SearchResponse>('http://localhost:5220/api/station/');
         return data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
