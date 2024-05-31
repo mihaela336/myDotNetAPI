@@ -1,5 +1,4 @@
 import React from 'react'
-import Tile from '../Tile/Tile'
 import { Outlet } from 'react-router-dom'
 
 interface Props {
