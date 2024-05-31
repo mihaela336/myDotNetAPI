@@ -3,18 +3,17 @@ import Sidebar from '../../Sidebar/Sidebar'
 import { Outlet, Search } from 'react-router-dom'
 import StationDashboard from '../../StationDashboard/StationDashboard'
 import Tile from '../../Tile/Tile'
-import { getStationDetails, searchStations } from '../../../api'
+import { getAll, getStationDetails, searchStations } from '../../../api'
 import { CreateStationRequestDto } from '../../../station'
+import { User } from '../../../types'
 
 interface Props { }
 
 function UserPage({ }: Props) {
   //declare search param to use in search function -to be removed
-  const [search, setSearch] = useState<string>("");
-
-  const [chargingSessionValues, setChargingSessionValues] = useState<string[]>([]);
+  const [search, setSearch] = useState<string>("user");
   //to save aray retrieved from api
-  const [searchResult, setSearchResult] = useState<CreateStationRequestDto[]>([]);
+  const [getAllresult, setGetAllResult] = useState<User[]>([]);
   //to save server error to display on page
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -23,16 +22,20 @@ function UserPage({ }: Props) {
 
   useEffect(()=>{
     const getAllUsers = async ()=>{
-      setSearch("search string from searchPage");
-      const result = await searchStations(search);
+    //  setSearch("search string from searchPage");
+      const result = await getAll(search);
       //setStation(result?.data[0]);
       if (typeof result === "string") {
         setServerError(result);
   
       } else if (Array.isArray(result.data)) {
-        setSearchResult(result.data);
+        setGetAllResult(result.data);
+        console.log("result data ", result.data);
       }
-      console.log(setSearchResult);
+      console.log(search);
+      console.log("get all result is: ",getAllresult);
+      
+
   
     };
     getAllUsers();

@@ -8,7 +8,7 @@ interface SearchResponse {
 //call get all method from api
 export const getAll = async (query: string) => {
     try {
-        const data = await axios.get<SearchResponse>('http://localhost:5220/api/user/');
+        const data = await axios.get<SearchResponse>(`http://localhost:5220/api/${query}/`);
         return data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
