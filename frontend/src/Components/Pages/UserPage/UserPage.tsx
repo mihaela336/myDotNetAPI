@@ -24,12 +24,9 @@ function UserPage(props: Props) {
 
      <Sidebar />
      <UserDashboard ticker={item!}><Tile title="Station Name" subTitle="{User.name}"/></UserDashboard>
-     
+
+
       </div>
-
-
-
-
 
     </>
 
