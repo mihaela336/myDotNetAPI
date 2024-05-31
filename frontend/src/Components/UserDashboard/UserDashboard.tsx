@@ -1,12 +1,12 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
 interface Props {
-    children:React.ReactNode;
-    ticker:string;
+  children:React.ReactNode;
+  ticker:string;
 }
 
-const StationDashboard = ({children, ticker}: Props) => {
+const UserDashboard = ({children, ticker}: Props) => {
   return (
     <div className="relative md:ml-64 bg-blueGray-100 w-full">
 
@@ -16,8 +16,10 @@ const StationDashboard = ({children, ticker}: Props) => {
 
         <div>
 
-          <div className="flex flex-wrap">{children} </div>
+
+          <div className="flex flex-wrap">{children} </div> 
           <div className="flex flex-wrap">{<Outlet context={ticker}/>} </div>
+          <p>user dashboard is here?</p>
 
         </div>
 
@@ -29,4 +31,4 @@ const StationDashboard = ({children, ticker}: Props) => {
   )
 }
 
-export default StationDashboard
+export default UserDashboard

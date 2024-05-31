@@ -13,6 +13,8 @@ import DesignPage from "../Pages/DesignPage/DesignPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
+import UserDashboard from "../UserDashboard/UserDashboard";
+import UserList from "../UserList/UserList";
 
 export const router = createBrowserRouter([
     {
@@ -23,8 +25,8 @@ export const router = createBrowserRouter([
             { path: "login", element: <LoginPage /> },
             { path: "register", element: <RegisterPage /> },
 
-            { path: "search", element: <ProtectedRoute><SearchPage /> </ProtectedRoute>},
-            { path: "chargingSessions", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute>},
+            { path: "search", element: <ProtectedRoute><SearchPage /> </ProtectedRoute> },
+            { path: "chargingSessions", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute> },
             {
                 path: "station/:ticker",
                 element: <ProtectedRoute><StationPage /></ProtectedRoute>,
@@ -37,8 +39,18 @@ export const router = createBrowserRouter([
             },
 
             { path: "transactions", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
-            { path: "users", element:<ProtectedRoute> <UserPage /> </ProtectedRoute>},
-            { path: "paymentPlans", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute>},
+            {
+                path: "users",
+                element: <ProtectedRoute> <UserPage /> </ProtectedRoute>,
+                children: [
+
+                    { path: "", element: <UserList /> },
+                    { path: "seeUsers", element: <ChargingSessions /> },
+                    { path: "transactions", element: <Transactions /> },
+                ]
+
+            },
+            { path: "paymentPlans", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute> },
             { path: "designGuide", element: <ProtectedRoute><DesignPage /></ProtectedRoute> },
 
         ]
