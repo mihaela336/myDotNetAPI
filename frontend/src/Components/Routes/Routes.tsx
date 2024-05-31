@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
             { path: "register", element: <RegisterPage /> },
 
             { path: "search", element: <ProtectedRoute><SearchPage /> </ProtectedRoute>},
-            { path: "chargingSession", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute>},
+            { path: "chargingSessions", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute>},
             {
                 path: "station/:ticker",
                 element: <ProtectedRoute><StationPage /></ProtectedRoute>,
@@ -36,9 +36,9 @@ export const router = createBrowserRouter([
                 ]
             },
 
-            { path: "transaction", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
-            { path: "user", element:<ProtectedRoute> <UserPage /> </ProtectedRoute>},
-            { path: "paymentPlan", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute>},
+            { path: "transactions", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
+            { path: "users", element:<ProtectedRoute> <UserPage /> </ProtectedRoute>},
+            { path: "paymentPlans", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute>},
             { path: "designGuide", element: <ProtectedRoute><DesignPage /></ProtectedRoute> },
 
         ]

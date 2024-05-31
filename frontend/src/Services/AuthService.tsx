@@ -1,6 +1,7 @@
 import axios from "axios";
 import { handleError } from "../Helpers/ErrorHandler";
 import { UserProfileToken } from "../Models/User";
+import jwtDecode from 'jwt-decode';
 
 const api="http://localhost:5220/api/";
 
