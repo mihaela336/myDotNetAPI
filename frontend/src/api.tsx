@@ -7,7 +7,7 @@ interface SearchResponse {
 
 export const searchStations = async (query: string) => {
     try {
-        const data = await axios.get<SearchResponse>('http://localhost:5220/test_Authorised_Mobile_user');
+        const data = await axios.get<SearchResponse>('http://localhost:5220/api/station/');
         return data;
     } catch (error) {
         if (axios.isAxiosError(error)) {

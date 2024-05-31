@@ -4,6 +4,7 @@ import { CreateStationRequestDto } from '../../../station';
 import { searchStations } from '../../../api';
 import ListChargingSessions from '../../ManageChargingSessions/ListChargingSessions/ListChargingSessions';
 import CardList from '../../CardList/CardList';
+import Sidebar from '../../Sidebar/Sidebar';
 
 interface Props {}
 
@@ -50,10 +51,26 @@ const SearchPage = (props: Props) => {
 
   return (
     <>
+          <div className="w-full relative flex ct-docs-disable-sidebar-content ">
+
+<Sidebar />
+<div>
+  
+{/* <StationDashboard ticker="ticker!"><Tile title="Station Name" subTitle="some string" /></StationDashboard> */}
+<div className="relative md:ml-64 bg-blueGray-100 w-full">
+  <div className="relative bg-lightBlue-500">
+    <div className="px-4 md:px-6 mx-auto w-full">
     <Search
       onSearchSubmit={onSearchSubmit}
       search={search}
       handleSearchChange={handleSearchChange} />
+    </div>
+  </div>
+</div>
+
+<div className="relative md:ml-64 bg-blueGray-100 w-full">
+  <div className="relative pt-20 pb-32 bg-lightBlue-500">
+    <div className="px-4 md:px-6 mx-auto w-full">
     <ListChargingSessions
       chargingSessionValues={chargingSessionValues}
       onChargingSessionDelete={onChargingSessionDelete} />
@@ -61,6 +78,12 @@ const SearchPage = (props: Props) => {
       searchResults={searchResult}
       onChargingSessionCreate={onChargingSessionCreate} />
     {serverError && <div>{serverError}</div>}
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
     </>
   )
 }

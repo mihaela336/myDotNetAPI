@@ -21,15 +21,36 @@ const Sidebar = (props: Props) => {
 
         <div className="md:flex-col md:min-w-full flex flex-col list-none">
 
-          <div className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+          <div className="md:min-w-full text-blueGray-500 text-medium font-bold block pt-1 pb-4 no-underline">
 
-            <Link to="chargingSessions" className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt--1 pb-4 no-underline">
+          <Link to="/search" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
-                <h6 className="ml-3">Charging Session</h6>
+                <h6 className="ml-3">Home</h6>
             </Link>
-            <Link to="transactions" className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt--1 pb-4 no-underline">
+
+          <Link to="station/:ticker" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+                <FaHome/>
+                <h6 className="ml-3">Stations</h6>
+            </Link>
+
+            <Link to="/user" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+                <FaHome/>
+                <h6 className="ml-3">Users</h6>
+            </Link>
+
+            <Link to="/chargingSessions" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+                <FaHome/>
+                <h6 className="ml-3">Charging Sessions</h6>
+            </Link>
+
+            <Link to="/transactions" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
                 <h6 className="ml-3">Transactions</h6>
+            </Link>
+
+            <Link to="/paymentPlan" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+                <FaHome/>
+                <h6 className="ml-3">Payment plans</h6>
             </Link>
             
 
