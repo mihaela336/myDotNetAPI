@@ -30,7 +30,7 @@ const UserDashboard = ({ children, ticker }: Props) => {
               type="submit"
               className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"
             >
-              Add User
+              Add new user
             </button></Link>
             <button
               type="submit"

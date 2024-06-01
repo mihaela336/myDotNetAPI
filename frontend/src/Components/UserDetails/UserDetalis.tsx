@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { getKeyMetrics, getUserById } from '../../api';
-import RatioList from '../RatioList/RatioList';
+import RatioList from '../ItemDetailsList/ItemDetailsList';
 import { User } from '../../types';
+import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
 
 type Props = {}
 const tableConfig = [
-    
+    {
+        label: "Id",
+        render: (user: User) => user.id,
+        subTitle:
+          "Unique identifier",
+      },
     {
       label: "Full Name",
       render: (user: User) => user.name,
       subTitle:
-        "The user's complete legal name.",
+        "Complete legal name.",
     },
     {
         label: "Email",
         render: (user: User) => user.email,
-        subTitle: "The user's primary email address for contact",
+        subTitle: "Primary email address for contact",
       },
       {
         label: "Phone",
         render: (user: User) => user.phone,
-        subTitle: "The user's primary contact number",
+        subTitle: "Primary contact number",
       },
       {
         label: "Address",
@@ -48,7 +54,24 @@ const UserDetalis = (props: Props) => {
     <>
     {userData? (
       <>
-            <RatioList data={userData} config={tableConfig}/>
+            <ItemDetailsList data={userData} config={tableConfig}/>
+
+            <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end w-full">
+          <Link
+              to="/user/add">
+           <button
+              type="submit"
+              className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"
+            >
+              Update
+            </button></Link>
+            <button
+              type="submit"
+              className="p-1 px-6 text-white bg-orange-300 mr-2 rounded-lg hover:opacity-70 focus:outline-none"
+            >
+              Delete
+            </button>
+          </div>
              </>
     ):(
       <>loading...</>
