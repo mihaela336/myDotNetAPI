@@ -61,7 +61,7 @@ export const getKeyMetrics = async(query:string)=>{
 
 export const getUserById = async(query:string)=>{
     try{
-        const data = await axios.get<User[]>(`http://localhost:5220/api/station`);
+        const data = await axios.get<User[]>(`http://localhost:5220/api/user/${query}`);
         return data;
 
     }
