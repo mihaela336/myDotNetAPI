@@ -7,15 +7,16 @@ import Item from '../Item/Item';
 
 interface Props {
   userList: User[];
+  route: string;
   // onChargingSessionCreate: (e: SyntheticEvent)=>void;
 }
 
-const ItemList : React.FC<Props> = ({userList}: Props) : JSX.Element => {
+const ItemList : React.FC<Props> = ({userList, route}: Props) : JSX.Element => {
   return (
     <>
   {userList.length >0 ?(
     userList.map((result)=>{
-      return <Item id ={result.name} user={result}  />;
+      return <Item id ={result.name} user={result}  route={route}/>;
       console.log("result is", result);
 
     })

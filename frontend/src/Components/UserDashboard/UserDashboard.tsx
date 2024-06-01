@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Tile from '../Tile/Tile';
 
 interface Props {
@@ -23,13 +23,15 @@ const UserDashboard = ({ children, ticker }: Props) => {
             <Tile title="Station Name" subTitle="{User.name}" />
 
           </div>
-          <div className="flex items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end">
-            <button
+          <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end">
+          <Link
+              to="/user/add">
+           <button
               type="submit"
               className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"
             >
               Add User
-            </button>
+            </button></Link>
             <button
               type="submit"
               className="p-1 px-6 text-white bg-orange-300 mr-2 rounded-lg hover:opacity-70 focus:outline-none"

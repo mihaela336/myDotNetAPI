@@ -15,6 +15,9 @@ import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
 import UserDashboard from "../UserDashboard/UserDashboard";
 import UserList from "../UserList/UserList";
+import AddUserForm from "../AddUserForm/AddUserForm";
+import EditUser from "../EditUser/EditUser";
+import UserDetalis from "../UserDetails/UserDetalis";
 
 export const router = createBrowserRouter([
     {
@@ -40,13 +43,14 @@ export const router = createBrowserRouter([
 
             { path: "transactions", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
             {
-                path: "users",
+                path: "user/",
                 element: <ProtectedRoute> <UserPage /> </ProtectedRoute>,
                 children: [
 
                     { path: "", element: <UserList /> },
-                    { path: "seeUsers", element: <ChargingSessions /> },
-                    { path: "transactions", element: <Transactions /> },
+                    { path: "add", element: <AddUserForm /> },
+                    { path: "update", element: <EditUser /> },
+                    { path: "details", element: <UserDetalis /> },
                 ]
 
             },
