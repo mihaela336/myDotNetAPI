@@ -15,9 +15,27 @@ import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
 import UserDashboard from "../UserDashboard/UserDashboard";
 import UserList from "../UserList/UserList";
-import AddUserForm from "../AddUserForm/AddUserForm";
+import AddUserForm from "../UserAdd/AddUserForm";
 import EditUser from "../EditUser/EditUser";
 import UserDetalis from "../UserDetails/UserDetalis";
+import ChargingSessionEdit from "../ChargingSessionEddit/EditChargingSession";
+import ChargingSessionList from "../ChargingSessionList/ChargingsessionList";
+import ChargingSessionAdd from "../ChargingSessionAdd/ChargingSessionAdd";
+import TransactionList from "../TransactionList/TransactionList";
+import TransactionAdd from "../TransactionAdd/TransactionAdd";
+import TransactionEdit from "../TransactionEdit/TransactionEdit";
+import ChargingsessionDetails from "../ChargingSessionDetails/ChargingsSessionDetails";
+import ChargingSessionDetails from "../ChargingSessionDetails/ChargingsSessionDetails";
+import TransactionDetails from "../TransactionDetails/TransactionDetails";
+import PaymentPlanAdd from "../PaymentPlanAdd/PaymentPlanAdd";
+import PaymentPlanList from "../PaymentPlanList/PaymentPlanList";
+import PaymentPlanEdit from "../PaymentPlanEdit/PaymentPlanEdit";
+import PaymentPlanDetails from "../PaymentPlanDetails/PaymentPlanDetails";
+import VehiclePage from "../Pages/VehiclePage/VehiclePage";
+import VehicleList from "../VehicleList/VehicleList";
+import VehicleAdd from "../VehicleAdd/VehicleAdd";
+import VehicleEdit from "../VehicleEdit/VehicleEdit";
+import VehicleDetails from "../VehicleDetails/VehicleDetails";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +47,17 @@ export const router = createBrowserRouter([
             { path: "register", element: <RegisterPage /> },
 
             { path: "search", element: <ProtectedRoute><SearchPage /> </ProtectedRoute> },
-            { path: "chargingSessions", element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute> },
+            { 
+                path: "chargingSession",
+                 element: <ProtectedRoute><ChargingSessionPage /> </ProtectedRoute> ,
+                 children: [
+
+                    { path: "", element: <ChargingSessionList /> },
+                    { path: "add", element: <ChargingSessionAdd /> },
+                    { path: "update", element: <ChargingSessionEdit /> },
+                    { path: "details", element: <ChargingSessionDetails /> },
+                ]
+                },
             {
                 path: "station/:ticker",
                 element: <ProtectedRoute><StationPage /></ProtectedRoute>,
@@ -41,7 +69,19 @@ export const router = createBrowserRouter([
                 ]
             },
 
-            { path: "transactions", element: <ProtectedRoute><TransactionPage /></ProtectedRoute> },
+            {
+                 path: "transaction",
+                  element: 
+                  <ProtectedRoute><TransactionPage /></ProtectedRoute> ,
+                  children: [
+ 
+                     { path: "", element: <TransactionList /> },
+                     { path: "add", element: <TransactionAdd /> },
+                     { path: "update", element: <TransactionEdit /> },
+                     { path: "details", element: <TransactionDetails /> },
+                 ]
+                
+                },
             {
                 path: "user/",
                 element: <ProtectedRoute> <UserPage /> </ProtectedRoute>,
@@ -54,7 +94,30 @@ export const router = createBrowserRouter([
                 ]
 
             },
-            { path: "paymentPlans", element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute> },
+            { 
+                path: "paymentPlan",
+                 element: <ProtectedRoute><PaymentPlanPage /> </ProtectedRoute>,
+                 children: [
+
+                    { path: "", element: <PaymentPlanList /> },
+                    { path: "add", element: <PaymentPlanAdd /> },
+                    { path: "update", element: <PaymentPlanEdit /> },
+                    { path: "details", element: <PaymentPlanDetails /> },
+                ]
+                
+                },
+                { 
+                    path: "vehicle",
+                     element: <ProtectedRoute><VehiclePage /> </ProtectedRoute>,
+                     children: [
+    
+                        { path: "", element: <VehicleList /> },
+                        { path: "add", element: <VehicleAdd /> },
+                        { path: "update", element: <VehicleEdit /> },
+                        { path: "details", element: <VehicleDetails /> },
+                    ]
+                    
+                    },
             { path: "designGuide", element: <ProtectedRoute><DesignPage /></ProtectedRoute> },
 
         ]

@@ -25,7 +25,7 @@ const validation = Yup.object().shape({
 
 })
 
-const EditUser = (props: Props) => {
+const TransactionEdit = (props: Props) => {
     const {registerUser}= useAuth();
     const {
         register,
@@ -189,4 +189,4 @@ const EditUser = (props: Props) => {
   
 }
 
-export default EditUser
+export default TransactionEdit
