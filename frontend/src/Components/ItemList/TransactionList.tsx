@@ -1,4 +1,6 @@
 import React, { SyntheticEvent } from 'react'
+import { CreateStationRequestDto } from '../../station';
+import {v4 as uuidv4} from "uuid";
 import { User } from '../../types';
 import Item from '../Item/Item';
 

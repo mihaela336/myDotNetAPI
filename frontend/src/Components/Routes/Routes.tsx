@@ -19,12 +19,10 @@ import AddUserForm from "../UserAdd/AddUserForm";
 import EditUser from "../EditUser/EditUser";
 import UserDetalis from "../UserDetails/UserDetalis";
 import ChargingSessionEdit from "../ChargingSessionEddit/EditChargingSession";
-import ChargingSessionList from "../ChargingSessionList/ChargingsessionList";
 import ChargingSessionAdd from "../ChargingSessionAdd/ChargingSessionAdd";
 import TransactionList from "../TransactionList/TransactionList";
 import TransactionAdd from "../TransactionAdd/TransactionAdd";
 import TransactionEdit from "../TransactionEdit/TransactionEdit";
-import ChargingsessionDetails from "../ChargingSessionDetails/ChargingsSessionDetails";
 import ChargingSessionDetails from "../ChargingSessionDetails/ChargingsSessionDetails";
 import TransactionDetails from "../TransactionDetails/TransactionDetails";
 import PaymentPlanAdd from "../PaymentPlanAdd/PaymentPlanAdd";
@@ -36,6 +34,7 @@ import VehicleList from "../VehicleList/VehicleList";
 import VehicleAdd from "../VehicleAdd/VehicleAdd";
 import VehicleEdit from "../VehicleEdit/VehicleEdit";
 import VehicleDetails from "../VehicleDetails/VehicleDetails";
+import ChargingSessionList from "../ChargingSessionList/ChargingSessionList";
 
 export const router = createBrowserRouter([
     {
