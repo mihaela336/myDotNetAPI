@@ -19,7 +19,7 @@ function UserPage(props: Props) {
      <div className="w-full relative flex ct-docs-disable-sidebar-content ">
 
      <Sidebar />
-     <UserDashboard ticker={item!}><Tile title="Station Name" subTitle="{User.name}"/></UserDashboard>
+     <UserDashboard ticker={item!}><Tile title="Viewing" subTitle="Users"/></UserDashboard>
 
 
       </div>

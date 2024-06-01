@@ -16,11 +16,11 @@ const UserDashboard = ({ children, ticker }: Props) => {
         <div className="px-4 md:px-6 mx-auto w-full">
 
           <div className="flex flex-wrap">{children}
-            <Tile title="Add user" subTitle="{User.name}" />
-            <Tile title="Station Name" subTitle="{User.name}" />
-            <Tile title="Station Name" subTitle="{User.name}" />
-            <Tile title="Station Name" subTitle="{User.name}" />
-            <Tile title="Station Name" subTitle="{User.name}" />
+            <Tile title="Last registered" subTitle="User 14" />
+            <Tile title="Total users" subTitle="1567" />
+            <Tile title="Total stations" subTitle="20" />
+            <Tile title="Total transactions" subTitle="10 568" />
+            <Tile title="Total charging sessions" subTitle="10 568" />
 
           </div>
           <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end">
