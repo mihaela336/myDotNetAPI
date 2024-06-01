@@ -7,11 +7,12 @@ import { User } from '../../types';
 interface Props {
     id: string;
     user: User;
+    route: string;
     //   onChargingSessionCreate: (e: SyntheticEvent)=> void;
 
 }
 
-const Item: React.FC<Props> = ({ id, user }: Props): JSX.Element => {
+const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
     return (
         <div
             className="py-3 sm:py-4"
@@ -24,7 +25,7 @@ const Item: React.FC<Props> = ({ id, user }: Props): JSX.Element => {
                 <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
 
-                        <Link to={`/station/${user.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
+                        <Link to={`/${route}/${user.id}/details`} className="font-bold text-center text-veryDarkViolet md:text-left">
                             {user.name} ({user.name})
                         </Link>
 
@@ -34,12 +35,13 @@ const Item: React.FC<Props> = ({ id, user }: Props): JSX.Element => {
                     </p>
                 </div>
                 <div className="inline-flex items-center text-base">
+                    <Link to={`/${route}/update`}>
                     <button
                         type="submit"
                         className="p-1 px-8 text-white mr-2 bg-darkBlue rounded-lg hover:opacity-70 focus:outline-none"
                     >
                         Update
-                    </button>
+                    </button> </Link>
                     <button
                         type="submit"
                         className="p-1 px-8 text-white bg-darkBlue rounded-lg hover:opacity-70 focus:outline-none"
