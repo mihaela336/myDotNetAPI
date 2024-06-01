@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom';
-import { getKeyMetrics, getUserById } from '../../api';
-import RatioList from '../ItemDetailsList/ItemDetailsList';
+import { Link, useLocation, useOutletContext } from 'react-router-dom';
 import { User } from '../../types';
 import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
+import { getUserById } from '../../api';
 
-type Props = {}
+interface Props {
+
+}
 const tableConfig = [
     {
         label: "Id",
@@ -39,13 +40,33 @@ const tableConfig = [
   
 
 const UserDetalis = (props: Props) => {
-    const ticker= useOutletContext<string>();
-    //store charging session data from api
-    const [userData, setUserData] = useState<User>();
+    const location = useLocation();
+    // const params = new URLSearchParams(location.search);
+    const queryString = location.search;
+  
+    // Remove the leading '?' if present
+    const userId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+  
+    console.log(userId);
+
+    const [userData, setUserData] = useState<User | undefined>();
     useEffect(()=>{
      const getUser = async()=>{
-       const value= await getUserById(ticker);
-       setUserData(value?.data[0])//number needs to be dinamically added for user id
+       const value= await getUserById(userId);
+       if (value && value.data && Array.isArray(value.data)) {
+        // If the response is an array, take the first element
+        if (value.data.length > 0) {
+          setUserData(value.data[0]);
+        } else {
+          // Handle case where no user is found
+          setUserData(undefined);
+        }
+      } else {
+        // Handle other cases where data may be missing or not in the expected format
+        setUserData(value?.data as User|undefined);
+      }
+    //    setUserData(value?.data[0])//number needs to be dinamically added for user id
+       console.log( "value", value);
      };
      getUser(); 
      

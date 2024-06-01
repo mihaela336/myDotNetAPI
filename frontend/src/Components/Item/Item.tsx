@@ -1,6 +1,4 @@
 import React, { SyntheticEvent } from 'react'
-import { CreateStationRequestDto } from '../../station';
-import AddChargingSession from '../ManageChargingSessions/AddChargingSession/AddChargingSession';
 import { Link } from 'react-router-dom';
 import { User } from '../../types';
 
@@ -25,7 +23,7 @@ const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
                 <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
 
-                        <Link to={`/${route}/${user.id}/details`} className="font-bold text-center text-veryDarkViolet md:text-left">
+                        <Link to={`/${route}/details?${user.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
                             {user.name} ({user.name})
                         </Link>
 
