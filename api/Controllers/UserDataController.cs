@@ -28,6 +28,18 @@ namespace api.Controllers
             return Ok(userDto);
         }
 
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task<IActionResult> GetById([FromRoute] string id)
+        {
+            var user = await _userRepo.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user.ToUserDto());
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAdmin()
