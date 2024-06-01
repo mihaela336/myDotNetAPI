@@ -14,12 +14,40 @@ namespace api.Mappers
             return new TransactionDto
             {
                 Id = transactionModel.Id,
+                //Station = transactionModel.Station.Select(c => c.ToStationDto());
+                ChargingSessionId = transactionModel.ChargingSessionId,
                 CreatedOn = transactionModel.CreatedOn,
-                KwTotal = transactionModel.KwTotal,
-                SurchargeTotal = transactionModel.SurchargeTotal
+                KwhPrice = transactionModel.KwhPrice,
+                KwhTotal = transactionModel.KwhTotal,
+                OverchargeHour = transactionModel.OverchargeHour,
+                OverchargeTotal = transactionModel.OverchargeTotal,
+                VAT = transactionModel.VAT,
+                Total = transactionModel.Total
+
+                //nex update transaction controller
+
+
             };
             
         }
+
+        public static Transaction ToTransactionFromCreateDto(this CreateTransactionRequestDto transactionDto)
+        {
+            return new Transaction
+            {
+                ChargingSessionId = transactionDto.ChargingSessionId,
+                CreatedOn = transactionDto.CreatedOn,
+                KwhPrice = transactionDto.KwhPrice,
+                KwhTotal = transactionDto.KwhTotal,
+                OverchargeHour = transactionDto.OverchargeHour,
+                OverchargeTotal = transactionDto.OverchargeTotal,
+                VAT = transactionDto.VAT,
+                Total = transactionDto.Total
+
+            };
+        }
         
     }
+
+
 }

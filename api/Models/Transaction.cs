@@ -10,17 +10,34 @@ namespace api.Models
     {
         public int Id { get; set; }
 
-        public int? StationId{get; set;}
-        public Station? Station {get; set;}
+        //TODO: implement 1 to 1 relationship
+        public int ChargingSessionId{get; set;}//TODO: check if it actually works 
+
+        public ChargingSession ChargingSession {get; set;}
+        
+
+        //1 to many relationship with user pt2 TODO: check if working
+        public string? UserId {get; set;} //forms fk relationship with db
+        public User? User {get; set;} 
+
         public DateTime CreatedOn {get; set;} = DateTime.Now;
 
-        [Column(TypeName="decimal(18,2)")] 
-        public decimal KwPrice {get; set;}
-        public decimal KwTotal {get; set;}
-         [Column(TypeName="decimal(18,2)")]
-        public decimal SurchargeHour {get; set;}
+        [Column(TypeName="decimal(18,5)")] 
+        public decimal KwhPrice {get; set;}
+        [Column(TypeName="decimal(18,5)")]
+        public decimal KwhTotal {get; set;}
+         [Column(TypeName="decimal(18,2)")] //this prevents the decimal to have over 2 when we store money
+        public decimal OverchargeHour {get; set;}
          [Column(TypeName="decimal(18,2)")] 
-        public decimal SurchargeTotal {get; set;}
+        public decimal OverchargeTotal {get; set;}
+
+        [Column(TypeName="decimal(18,2)")] 
+        public decimal VAT {get; set;}
+
+        [Column(TypeName="decimal(18,2)")] 
+        public decimal Total {get; set;}
+
+
 
 
     }
