@@ -25,12 +25,12 @@ const ChargingSessionDashboard = ({children}: Props) => {
               </div>
               <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end">
               <Link
-                  to="/user/add">
+                  to="/chargingSession/add">
                <button
                   type="submit"
                   className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"
                 >
-                  Add new user
+                  Add new session
                 </button></Link>
                 <button
                   type="submit"

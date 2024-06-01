@@ -6,25 +6,20 @@ import { useAuth } from '../../Context/useAuth';
 import { Link } from 'react-router-dom';
 
 type Props = {}
-type EditUserFormsInputs = {
+type AddVehicleFormsInputs = {
 
-    email: string;
-    userName: string;
-    password: string;
-    fullName:string;
-    phone:string;
-    adress:string;
+    userId: string;
+    addedOn: string;
+    producer:string;
+    model:string;
 }
 
 const validation = Yup.object().shape({
 
-    email: Yup.string().required("Email is required"),
-    userName: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required"),
-    fullName: Yup.string().required("Full Name is required"),
-    phone: Yup.string().required("Phone is required"),
-    adress: Yup.string().required("adress is required"),
-
+  userId: Yup.string().required("Email is required"),
+  addedOn: Yup.string().required("Username is required"),
+  producer: Yup.string().required("Password is required"),
+  model: Yup.string().required("Full Name is required"),
 })
 
 const VehicleAdd = (props: Props) => {
@@ -33,10 +28,10 @@ const VehicleAdd = (props: Props) => {
         register,
          handleSubmit,
           formState: { errors},
-        }=useForm<EditUserFormsInputs>({resolver: yupResolver(validation)});
-    const handleRegister= (form:EditUserFormsInputs)=>{
+        }=useForm<AddVehicleFormsInputs>({resolver: yupResolver(validation)});
+    const handleRegister= (form:AddVehicleFormsInputs)=>{
         //api method from userContext
-        registerUser(form.email, form.userName, form.password, form.fullName, form.phone, form.adress);
+        // registerUser(form.email, form.userName, form.password, form.fullName, form.phone, form.adress);
     };
   return (
     
@@ -44,111 +39,78 @@ const VehicleAdd = (props: Props) => {
 
         <div className="flex flex-wrap w-full p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-          Add new user
+          Add New Vehicle
           </h1>
           <form className=" w-full space-y-4 md:space-y-6" onSubmit={handleSubmit(handleRegister)}>
 
 
           <div>
               <label
-                htmlFor="email"
+                htmlFor="userId"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Email
+                User Id
               </label>
               <input
                 type="text"
-                id="email"
+                id="userId"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Email"
-                {...register("email")}
+                placeholder="User Id"
+                // {...register("email")}
               />
-              {errors.email ? <p>{errors.email.message}</p>: ""}
+              {errors.userId ? <p>{errors.userId.message}</p>: ""}
             </div>
            
             <div>
               <label
-                htmlFor="username"
+                htmlFor="addedOn"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Username
+                Date added
               </label>
               <input
-                type="text"
-                id="username"
+                type="datetime-local"
+                step="1"
+                id="addedOn"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Username"
-                {...register("userName")}
+                // {...register("userName")}
               />
-              {errors.userName ? <p>{errors.userName.message}</p>: ""}
+              {errors.addedOn ? <p>{errors.addedOn.message}</p>: ""}
             </div>
             <div>
               <label
-                htmlFor="password"
+                htmlFor="producer"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Password
+                Producer
               </label>
               <input
-                type="password"
-                id="password"
-                placeholder="••••••••"
+                type="text"
+                id="producer"
+                placeholder="Producer name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                {...register("password")}
+                // {...register("password")}
               />
-              {errors.password ? <p>{errors.password.message}</p>: ""}
+              {errors.producer ? <p>{errors.producer.message}</p>: ""}
             </div>
 
             <div>
               <label
-                htmlFor="fullName"
+                htmlFor="model"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Full Name
+                Model
               </label>
               <input
                 type="text"
-                id="fullName"
+                id="model"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Full Name"
-                {...register("fullName")}
+                placeholder="Model"
+                // {...register("fullName")}
               />
-              {errors.fullName ? <p>{errors.fullName.message}</p>: ""}
+              {errors.model ? <p>{errors.model.message}</p>: ""}
             </div>
 
-            <div>
-              <label
-                htmlFor="phone"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Phone
-              </label>
-              <input
-                type="text"
-                id="phone"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Phone"
-                {...register("phone")}
-              />
-              {errors.phone ? <p>{errors.phone.message}</p>: ""}
-            </div>
-
-            <div>
-              <label
-                htmlFor="adress"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Adress
-              </label>
-              <input
-                type="text"
-                id="Adress"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Adress"
-                {...register("adress")}
-              />
-              {errors.adress ? <p>{errors.adress.message}</p>: ""}
-            </div>
             <div className="flex items-center justify-between">
 
             </div>
