@@ -11,7 +11,7 @@ const PaymentPlanPage = (props: Props) => {
       <div className="w-full relative flex ct-docs-disable-sidebar-content ">
   
       <Sidebar />
-      <PaymentPlanDashboard ><Tile title="Viewing" subTitle="Charging Sessions"/></PaymentPlanDashboard>
+      <PaymentPlanDashboard ><Tile title="Viewing" subTitle="Payment Plans"/></PaymentPlanDashboard>
   
   
        </div>

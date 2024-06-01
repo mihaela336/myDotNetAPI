@@ -3,25 +3,28 @@ import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../Context/useAuth';
+import { Link } from 'react-router-dom';
 
 type Props = {}
-type RegisterFormsInputs = {
-    id: string;
-    email: string;
-    userName: string;
-    password: string;
-    fullName:string;
-    phone:string;
-    adress:string;
+type EditChargingSessionFormsInputs = {
+id: number;
+  stationId: number;
+  userId: string;
+  sessionStart:string;
+  sessionEnd: string;
+  chargingTime: string;
+  kwhDelivered: number;
 }
+
 const validation = Yup.object().shape({
-    id: Yup.string().required("Id is required"),
-    email: Yup.string().required("Email is required"),
-    userName: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required"),
-    fullName: Yup.string().required("Full Name is required"),
-    phone: Yup.string().required("Phone is required"),
-    adress: Yup.string().required("adress is required"),
+
+  id: Yup.number().required("ChargingSession Id is required"), 
+  stationId: Yup.number().required("Station Id is required"),
+    userId: Yup.string().required("User id is required"),
+    sessionStart: Yup.string().required("Session start time is required"),
+    sessionEnd: Yup.string().required("Session end time is required"),
+    chargingTime: Yup.string().required("Charging time is required"),
+    kwhDelivered: Yup.number().required("Kwh delivered is required"),
 
 })
 
@@ -31,149 +34,153 @@ const ChargingSessionEdit = (props: Props) => {
         register,
          handleSubmit,
           formState: { errors},
-        }=useForm<RegisterFormsInputs>({resolver: yupResolver(validation)});
-    const handleRegister= (form:RegisterFormsInputs)=>{
+        }=useForm<EditChargingSessionFormsInputs>({resolver: yupResolver(validation)});
+    const handleRegister= (form:EditChargingSessionFormsInputs)=>{
         //api method from userContext
-        registerUser(form.email, form.userName, form.password, form.fullName, form.phone, form.adress);
+        // registerUser(form.email, form.userName, form.password, form.fullName, form.phone, form.adress);
     };
   return (
+    
     <section className="flex flex-wrap mr-64 bg-gray-50 dark:bg-gray-900 w-full">
 
-    <div className="flex flex-wrap w-full p-6 space-y-4 md:space-y-6 sm:p-8">
-      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-      Edit user
-      </h1>
-      <form className=" w-full space-y-4 md:space-y-6" onSubmit={handleSubmit(handleRegister)}>
+        <div className="flex flex-wrap w-full p-6 space-y-4 md:space-y-6 sm:p-8">
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          Edit Charging Session
+          </h1>
+          <form className=" w-full space-y-4 md:space-y-6" onSubmit={handleSubmit(handleRegister)}>
 
-      <div>
+
+          <div>
               <label
                 htmlFor="id"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                ID
+                Charging session Id
               </label>
               <input
                 type="text"
                 id="id"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="ID"
-                {...register("id")}
+                placeholder="Id"
+                // {...register("email")} Todo:replace with add session method
               />
               {errors.id ? <p>{errors.id.message}</p>: ""}
             </div>
-       
-      <div>
-          <label
-            htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Email
-          </label>
-          <input
-            type="text"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Email"
-            {...register("email")}
-          />
-          {errors.email ? <p>{errors.email.message}</p>: ""}
-        </div>
-       
-        <div>
-          <label
-            htmlFor="username"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Username"
-            {...register("userName")}
-          />
-          {errors.userName ? <p>{errors.userName.message}</p>: ""}
-        </div>
-        <div>
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="••••••••"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            {...register("password")}
-          />
-          {errors.password ? <p>{errors.password.message}</p>: ""}
-        </div>
+          <div>
+              <label
+                htmlFor="stationId"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Station Id
+              </label>
+              <input
+                type="text"
+                id="stationId"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Station Id"
+                // {...register("email")} Todo:replace with add session method
+              />
+              {errors.stationId ? <p>{errors.stationId.message}</p>: ""}
+            </div>
+           
+            <div>
+              <label
+                htmlFor="userId"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                User Id
+              </label>
+              <input
+                type="text"
+                id="userId"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="User Id"
+                // {...register("userName")}
+              />
+              {errors.userId ? <p>{errors.userId.message}</p>: ""}
+            </div>
+            <div>
+              <label
+                htmlFor="sessionStart"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Start of session
+              </label>
+              <input
+                type="datetime-local"
+                step="1"
+                id="sessionStart"
+                placeholder="Session Start"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                // {...register("password")}
+              />
+              {errors.sessionStart ? <p>{errors.sessionStart.message}</p>: ""}
+            </div>
 
-        <div>
-          <label
-            htmlFor="fullName"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Full Name"
-            {...register("fullName")}
-          />
-          {errors.fullName ? <p>{errors.fullName.message}</p>: ""}
-        </div>
+            <div>
+              <label
+                htmlFor="sessionEnd"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                End of session
+              </label>
+              <input
+                type="datetime-local"
+                step="1"
+                id="sessionEnd"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Session End"
+                // {...register("fullName")}
+              />
+              {errors.sessionEnd ? <p>{errors.sessionEnd.message}</p>: ""}
+            </div>
 
-        <div>
-          <label
-            htmlFor="phone"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Phone
-          </label>
-          <input
-            type="text"
-            id="phone"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Phone"
-            {...register("phone")}
-          />
-          {errors.phone ? <p>{errors.phone.message}</p>: ""}
-        </div>
+            <div>
+              <label
+                htmlFor="chargingTime"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Charging session duration
+              </label>
+              <input
+                type="time"
+                step="1"
+                id="chargingTime"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Charging session duration"
+                // {...register("phone")}
+              />
+              {errors.chargingTime? <p>{errors.chargingTime.message}</p>: ""}
+            </div>
 
-        <div>
-          <label
-            htmlFor="adress"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Adress
-          </label>
-          <input
-            type="text"
-            id="Adress"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Adress"
-            {...register("adress")}
-          />
-          {errors.adress ? <p>{errors.adress.message}</p>: ""}
-        </div>
-        <div className="flex items-center justify-between">
+            <div>
+              <label
+                htmlFor="kwhDelivered"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                KWh Delivered
+              </label>
+              <input
+                type="text"
+                id="kwhDelivered"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="total KWH delivered"
+                // {...register("adress")}
+              />
+              {errors.kwhDelivered ? <p>{errors.kwhDelivered.message}</p>: ""}
+            </div>
+            <div className="flex items-center justify-between">
 
-        </div>
-        <button
-          type="submit"
-          className="w-full text-white bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        >
-          Add user
-        </button>
-                    {/* <Link */}
+            </div>
+            <button
+              type="submit"
+              className="w-full text-white bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            >
+              Add
+            </button>
+            {/* <Link */}
               {/* to="/user"> */}
-              <button
+            <button
               type="submit"
               className="w-full text-white bg-orange-300 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
@@ -181,12 +188,11 @@ const ChargingSessionEdit = (props: Props) => {
             </button>
             {/* </Link> */}
 
-      </form>
+          </form>
 
-</div>
-</section>
-);
-  
+    </div>
+  </section>
+  );
 }
 
 export default ChargingSessionEdit

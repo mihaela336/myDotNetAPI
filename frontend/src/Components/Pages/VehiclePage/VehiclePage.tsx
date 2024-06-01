@@ -10,7 +10,7 @@ const VehiclePage = (props: Props) => {
     <div className="w-full relative flex ct-docs-disable-sidebar-content ">
   
     <Sidebar />
-    <VehicleDashboard ><Tile title="Viewing" subTitle="Charging Sessions"/></VehicleDashboard>
+    <VehicleDashboard ><Tile title="Viewing" subTitle="Vehicles"/></VehicleDashboard>
 
 
      </div>

@@ -22,7 +22,7 @@ export interface Station {
 }
 
 export interface Transaction {
-    id: string;
+    id: number;
     chargingSessionId: number;
     createdOn: string;
     kwhPrice: number;

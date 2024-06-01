@@ -22,14 +22,14 @@ type AddTransactionInputs = {
 const validation = Yup.object().shape({
 
 
-  chargingSessionId: Yup.number().required("Username is required"),
-  createdOn: Yup.string().required("Password is required"),
-  kwhPrice: Yup.number().required("Full Name is required"),
-  kwhTotal: Yup.number().required("Phone is required"),
-  overchargeHour: Yup.number().required("adress is required"),
-  overchargeTotal: Yup.number().required("adress is required"),
-  vat: Yup.number().required("adress is required"),
-  total: Yup.number().required("adress is required"),
+  chargingSessionId: Yup.number().required("Charging Session Id is required"),
+  createdOn: Yup.string().required("Transaction date is required"),
+  kwhPrice: Yup.number().required("KWh price is required"),
+  kwhTotal: Yup.number().required("KWh total is required"),
+  overchargeHour: Yup.number().required("Price of overcharge / hour is required"),
+  overchargeTotal: Yup.number().required("Overcharge Total  is required"),
+  vat: Yup.number().required("Vat value is required"),
+  total: Yup.number().required("Transaction total is required"),
 
 })
 

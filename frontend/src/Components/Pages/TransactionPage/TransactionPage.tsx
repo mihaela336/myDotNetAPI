@@ -10,7 +10,7 @@ const TransactionPage = (props: Props) => {
     <div className="w-full relative flex ct-docs-disable-sidebar-content ">
   
     <Sidebar />
-    <TransactionDashboard ><Tile title="Viewing" subTitle="Charging Sessions"/></TransactionDashboard>
+    <TransactionDashboard ><Tile title="Viewing" subTitle="Transactions"/></TransactionDashboard>
 
 
      </div>
