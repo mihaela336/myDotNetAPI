@@ -38,17 +38,17 @@ const Sidebar = (props: Props) => {
                 <h6 className="ml-3">Users</h6>
             </Link>
 
-            <Link to="/chargingSessions" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+            <Link to="/chargingSession" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
                 <h6 className="ml-3">Charging Sessions</h6>
             </Link>
 
-            <Link to="/transactions" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+            <Link to="/transaction" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
                 <h6 className="ml-3">Transactions</h6>
             </Link>
 
-            <Link to="/paymentPlans" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+            <Link to="/paymentPlan" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
                 <h6 className="ml-3">Payment plans</h6>
             </Link>
