@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StationKeyMetrics } from '../../station'
 import { useOutletContext } from 'react-router-dom';
 import { getKeyMetrics } from '../../api';
-import RatioList from '../RatioList/RatioList';
+import RatioList from '../ItemDetailsList/ItemDetailsList';
 
 interface Props {}
 

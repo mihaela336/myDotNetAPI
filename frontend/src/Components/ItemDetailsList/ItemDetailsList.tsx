@@ -8,7 +8,7 @@ type Props = {
 }
 
 
-const RatioList = ({config, data}: Props) => {
+const ItemDetailsList = ({config, data}: Props) => {
     const renderedRows = config.map((row: any) => {
         return(
             <li className="py-3 sm:py-4">
@@ -29,11 +29,11 @@ const RatioList = ({config, data}: Props) => {
         );
     })
   return (
-    <div className="bg-white shadow rounded-lg  ml-4 mt 4 mb-4 p-4 sm:p-6 h-full">
+    <div className="bg-white shadow rounded-lg  mr-64 ml-4 mt 4 mb-4 p-4 sm:p-6 h-full w-full">
         <ul className="divide-y divided-gray-200"> {renderedRows}</ul>
 
     </div>
   )
 };
 
-export default RatioList
+export default ItemDetailsList

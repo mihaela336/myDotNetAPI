@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
                     { path: "", element: <UserList /> },
                     { path: "add", element: <AddUserForm /> },
                     { path: "update", element: <EditUser /> },
-                    { path: "details", element: <UserDetalis /> },
+                    { path: ":ticker/details", element: <UserDetalis /> },
                 ]
 
             },

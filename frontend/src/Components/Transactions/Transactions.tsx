@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StationDetails } from '../../station'
 import { useOutlet, useOutletContext } from 'react-router-dom'
 import { getTransactions } from '../../api'
-import RatioList from '../RatioList/RatioList'
+import RatioList from '../ItemDetailsList/ItemDetailsList'
 import Table from '../Table/Table'
 
 interface Props {}

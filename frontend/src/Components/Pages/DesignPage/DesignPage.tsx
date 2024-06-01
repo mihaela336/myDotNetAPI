@@ -1,6 +1,6 @@
 import React from 'react'
 import Table from '../../Table/Table'
-import RatioList from '../../RatioList/RatioList'
+import RatioList from '../../ItemDetailsList/ItemDetailsList'
 import { StationDetails, StationKeyMetrics } from '../../../station';
 import { testIncomeStatementData } from '../../Table/TestData';
 
