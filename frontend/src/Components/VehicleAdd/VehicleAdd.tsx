@@ -27,7 +27,7 @@ const validation = Yup.object().shape({
 
 })
 
-const AddUserForm = (props: Props) => {
+const VehicleAdd = (props: Props) => {
     const {registerUser}= useAuth();
     const {
         register,
@@ -175,4 +175,4 @@ const AddUserForm = (props: Props) => {
   );
 }
 
-export default AddUserForm
+export default VehicleAdd
