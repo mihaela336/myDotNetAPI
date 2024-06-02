@@ -45,16 +45,12 @@ const ChargingSessionList = (props: Props) => {
     <>
       <div className="w-full flex flex-wrap md:mr-64">
         {/* add charging session List */}
-
         <div className="  shadow rounded-lg px-4 ml-4 mt 4 mb-4 p-4 sm:p-6 h-full w-full">
           <ChargingSessionItemList
             chargingSessionList={getAllResult} route={item} />
           {serverError && <div>{serverError}</div>}
-
         </div>
       </div>
-
-
     </>
   )
 }

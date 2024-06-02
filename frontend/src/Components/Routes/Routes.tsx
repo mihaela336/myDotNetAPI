@@ -35,6 +35,10 @@ import VehicleAdd from "../VehicleAdd/VehicleAdd";
 import VehicleEdit from "../VehicleEdit/VehicleEdit";
 import VehicleDetails from "../VehicleDetails/VehicleDetails";
 import ChargingSessionList from "../ChargingSessionList/ChargingSessionList";
+import StationList from "../StationList/StationList";
+import StationEdit from "../StationEdit/StationEdit";
+import StationAdd from "../StationAdd/StationAdd";
+import StationDetails from "../StationDetails/StationDetails";
 
 export const router = createBrowserRouter([
     {
@@ -58,9 +62,13 @@ export const router = createBrowserRouter([
                 ]
                 },
             {
-                path: "station/:ticker",
+                path: "station",
                 element: <ProtectedRoute><StationPage /></ProtectedRoute>,
                 children: [
+                    { path: "", element: <StationList /> },
+                    { path: "add", element: <StationAdd /> },
+                    { path: "update", element: <StationEdit /> },
+                    { path: "details", element: <StationDetails /> },
 
                     { path: "", element: <HomePage /> },
                     { path: "chargingSessions", element: <ChargingSessions /> },

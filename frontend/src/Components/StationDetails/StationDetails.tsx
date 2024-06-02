@@ -39,7 +39,7 @@ const tableConfig = [
   ];
   
 
-const UserDetalis = (props: Props) => {
+const TransactionDetails = (props: Props) => {
     const location = useLocation();
     // const params = new URLSearchParams(location.search);
     const queryString = location.search;
@@ -101,4 +101,4 @@ const UserDetalis = (props: Props) => {
   )
 }
 
-export default UserDetalis
+export default TransactionDetails

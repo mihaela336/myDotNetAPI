@@ -1,22 +1,23 @@
 import React, { SyntheticEvent } from 'react'
-import { CreateStationRequestDto } from '../../station';
-import {v4 as uuidv4} from "uuid";
-import { User } from '../../types';
-import Item from '../Item/Item';
+import { ChargingSession, Station } from '../../types';
+import StationItem from '../Item/StationItem';
 
 
 interface Props {
-  userList: User[];
+  stationList: Station[];
   route: string;
   // onChargingSessionCreate: (e: SyntheticEvent)=>void;
 }
 
-const ItemList : React.FC<Props> = ({userList, route}: Props) : JSX.Element => {
+const StationnList : React.FC<Props> = ({stationList, route}: Props) : JSX.Element => {
   return (
     <>
-  {userList.length >0 ?(
-    userList.map((result)=>{
-      return <Item id ={result.name} user={result}  route={route}/>;
+  {
+  
+  stationList.length >0 ?(
+    
+    stationList.map((result)=>{
+      return <StationItem  id ={result.id} station={result}  route={route}/>;
       console.log("result is", result);
 
     })
@@ -24,8 +25,8 @@ const ItemList : React.FC<Props> = ({userList, route}: Props) : JSX.Element => {
     <p className="mb-3 mt-3 text-xl font-semibold shadow rounded-lg  text-center md:text-xl">
     No results!
   </p>
-  )}/</>
+  )}</>
   )
 }
 
-export default ItemList
+export default StationnList
