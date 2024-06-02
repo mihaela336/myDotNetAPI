@@ -10,7 +10,6 @@ const ChargingSessionList = (props: Props) => {
   const [item, setItem] = useState<string>("chargingSession");
   //to save aray retrieved from api
   const [getAllResult, setGetAllResult] = useState<ChargingSession[]>([]);
-  // const [userData, setUserData] = useState<ChargingSession>();
   //to save server error to display on page
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -28,7 +27,6 @@ const ChargingSessionList = (props: Props) => {
       } else if (Array.isArray(result.data)) {
         setGetAllResult(result.data);
         //forTesting only needs to be moved
-        // setGetAllResult(result?.data[3]); //i'll need this if i make it an array
         console.log("result data ", result.data);
 
       }

@@ -9,7 +9,7 @@ interface Props {
   // onChargingSessionCreate: (e: SyntheticEvent)=>void;
 }
 
-const ItemList : React.FC<Props> = ({chargingSessionList, route}: Props) : JSX.Element => {
+const ChargingSessionList : React.FC<Props> = ({chargingSessionList, route}: Props) : JSX.Element => {
   return (
     <>
   {
@@ -25,8 +25,8 @@ const ItemList : React.FC<Props> = ({chargingSessionList, route}: Props) : JSX.E
     <p className="mb-3 mt-3 text-xl font-semibold shadow rounded-lg  text-center md:text-xl">
     No results!
   </p>
-  )}/</>
+  )}</>
   )
 }
 
-export default ItemList
+export default ChargingSessionList

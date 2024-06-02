@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react'
 import { Link } from 'react-router-dom';
-import { ChargingSession, User } from '../../types';
+import { ChargingSession } from '../../types';
 
 interface Props {
     id: number;
@@ -8,7 +8,7 @@ interface Props {
     route: string;
 }
 
-const Item: React.FC<Props> = ({ id, chargingSession, route }: Props): JSX.Element => {
+const ChargingSessionItem: React.FC<Props> = ({ id, chargingSession, route }: Props): JSX.Element => {
     const idAsString: string = id.toString();
     return (
         <div
@@ -23,7 +23,7 @@ const Item: React.FC<Props> = ({ id, chargingSession, route }: Props): JSX.Eleme
 
 
                         <Link to={`/${route}/details?${chargingSession.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
-                            <span className="mr-2">Chargingsession id:</span> {chargingSession.id}
+                            <span className="mr-2">Charging session id:</span> {chargingSession.id}
                         </Link>
 
                     </p>
@@ -68,4 +68,4 @@ const Item: React.FC<Props> = ({ id, chargingSession, route }: Props): JSX.Eleme
     );
 };
 
-export default Item
+export default ChargingSessionItem

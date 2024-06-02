@@ -24,7 +24,7 @@ const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
                     <p className="text-sm font-medium text-gray-900 truncate">
 
                         <Link to={`/${route}/details?${user.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
-                            {user.name} ({user.name})
+                            {user.name} 
                         </Link>
 
                     </p>

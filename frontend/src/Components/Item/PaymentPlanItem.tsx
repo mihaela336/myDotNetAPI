@@ -1,14 +1,14 @@
 import React, { SyntheticEvent } from 'react'
 import { Link } from 'react-router-dom';
-import { Vehicle } from '../../types';
+import { PaymentPlan} from '../../types';
 
 interface Props {
     id: number;
-    vehicle: Vehicle;
+    paymentPlan: PaymentPlan;
     route: string;
-  }
+}
 
-const Item: React.FC<Props> = ({ id, vehicle , route}: Props): JSX.Element => {
+const PaymentPlanItem: React.FC<Props> = ({ id, paymentPlan , route}: Props): JSX.Element => {
     const idAsString: string = id.toString();
     return (
         <div
@@ -17,21 +17,23 @@ const Item: React.FC<Props> = ({ id, vehicle , route}: Props): JSX.Element => {
             id={idAsString}
         >
 
+            {/* <li className="py-3 sm:py-4"> */}
             <div className="flex items-center space-x-4 truncate  border-b border-gray-200">
                 <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
 
-                    <Link to={`/${route}/details?${vehicle.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
-                            {vehicle.producer} {vehicle.model}
+                    <Link to={`/${route}/details?${paymentPlan.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
+                            <span className="mr-2">Payment plan id:</span> {paymentPlan.id}
                         </Link>
 
                     </p>
                     <p className="text-sm text-gray-500 truncate">
-                    <span className="font-bold mr-2">Register date:
+                    <span className="font-bold mr-2">Payment plan type:
                         </span>
-                        {vehicle.addedOn}
+                        {paymentPlan.planType}
                     </p>
                 </div>
+                
                 <div className="inline-flex items-center text-base">
                     <Link to={`/${route}/update`}>
                     <button
@@ -48,7 +50,7 @@ const Item: React.FC<Props> = ({ id, vehicle , route}: Props): JSX.Element => {
                     </button>
                 </div>
             </div>
-   
+            {/* </li> */}
         </div>
 
 
@@ -56,4 +58,4 @@ const Item: React.FC<Props> = ({ id, vehicle , route}: Props): JSX.Element => {
     );
 };
 
-export default Item
+export default PaymentPlanItem
