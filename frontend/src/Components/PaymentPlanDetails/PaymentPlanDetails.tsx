@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import { User } from '../../types';
+import { PaymentPlan } from '../../types';
 import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
-import { getUserById } from '../../api';
+import { getPaymentPlanById } from '../../api';
 
 interface Props {
 
@@ -10,32 +10,16 @@ interface Props {
 const tableConfig = [
     {
         label: "Id",
-        render: (user: User) => user.id,
+        render: (paymentPlan: PaymentPlan) => paymentPlan.id,
         subTitle:
           "Unique identifier",
       },
     {
-      label: "Full Name",
-      render: (user: User) => user.name,
+      label: "Plan type",
+      render: (paymentPlan: PaymentPlan) => paymentPlan.planType,
       subTitle:
-        "Complete legal name.",
-    },
-    {
-        label: "Email",
-        render: (user: User) => user.email,
-        subTitle: "Primary email address for contact",
-      },
-      {
-        label: "Phone",
-        render: (user: User) => user.phone,
-        subTitle: "Primary contact number",
-      },
-      {
-        label: "Address",
-        render: (user: User) => user.adress,
-        subTitle: "The user's residential or mailing address",
-      }
-
+        "Type of payment plan selected",
+    }
   ];
   
 
@@ -45,41 +29,41 @@ const PaymentPlanDetails = (props: Props) => {
     const queryString = location.search;
   
     // Remove the leading '?' if present
-    const userId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+    const paymentPlanId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
   
-    console.log(userId);
+    console.log(paymentPlanId);
 
-    const [userData, setUserData] = useState<User | undefined>();
+    const [paymentPlanData, setPaymentPlanData] = useState<PaymentPlan | undefined>();
     useEffect(()=>{
-     const getUser = async()=>{
-       const value= await getUserById(userId);
+     const getPaymentPlan = async()=>{
+       const value= await getPaymentPlanById(paymentPlanId);
        if (value && value.data && Array.isArray(value.data)) {
         // If the response is an array, take the first element
         if (value.data.length > 0) {
-          setUserData(value.data[0]);
+          setPaymentPlanData(value.data[0]);
         } else {
-          // Handle case where no user is found
-          setUserData(undefined);
+          // Handle case where no paymentPlan is found
+          setPaymentPlanData(undefined);
         }
       } else {
         // Handle other cases where data may be missing or not in the expected format
-        setUserData(value?.data as User|undefined);
+        setPaymentPlanData(value?.data as PaymentPlan|undefined);
       }
-    //    setUserData(value?.data[0])//number needs to be dinamically added for user id
+    //    setPaymentPlanData(value?.data[0])//number needs to be dinamically added for paymentPlan id
        console.log( "value", value);
      };
-     getUser(); 
+     getPaymentPlan(); 
      
     },[])
   return (
     <>
-    {userData? (
+    {paymentPlanData? (
       <>
-            <ItemDetailsList data={userData} config={tableConfig}/>
+            <ItemDetailsList data={paymentPlanData} config={tableConfig}/>
 
             <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end w-full">
           <Link
-              to="/user/add">
+              to="/paymentPlan/add">
            <button
               type="submit"
               className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"

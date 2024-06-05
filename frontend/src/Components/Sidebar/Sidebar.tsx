@@ -28,7 +28,7 @@ const Sidebar = (props: Props) => {
                 <h6 className="ml-3">Home</h6>
             </Link>
 
-          <Link to="station/:ticker" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
+          <Link to="/station" className="flex md:min-w-full text-blueGray-500 font-bold block pt--1 pb-4 no-underline">
                 <FaHome/>
                 <h6 className="ml-3">Stations</h6>
             </Link>

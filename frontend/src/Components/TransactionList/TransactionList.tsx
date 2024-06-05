@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { User } from '../../types';
+import { Transaction } from '../../types';
 import { getAll } from '../../api';
-import ItemList from '../ItemList/ItemList';
+import TransactionItemList from '../ItemList/TransactionsItemList';
 
 type Props = {}
 
 const TransactionList = (props: Props) => {
       //declare search param to use in search function -to be removed
-  const [item, setItem] = useState<string>("user");
+  const [item, setItem] = useState<string>("transaction");
   //to save aray retrieved from api
-  const [getAllResult, setGetAllResult] = useState<User[]>([]);
-  const [userData, setUserData] = useState<User>();
+  const [getAllResult, setGetAllResult] = useState<Transaction[]>([]);
   //to save server error to display on page
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -18,7 +17,7 @@ const TransactionList = (props: Props) => {
 
 
   useEffect(() => {
-    const getAllUsers = async () => {
+    const getAllTransactions = async () => {
       //  setSearch("search string from searchPage");
       const result = await getAll(item);
       //setStation(result?.data[0]);
@@ -28,13 +27,11 @@ const TransactionList = (props: Props) => {
       } else if (Array.isArray(result.data)) {
         setGetAllResult(result.data);
         //forTesting only needs to be moved
-        setUserData(result?.data[3]);
         console.log("result data ", result.data);
-        console.log("userData", userData);
       }
 
     };
-    getAllUsers();
+    getAllTransactions();
 
 
   }, [item]);
@@ -44,9 +41,9 @@ const TransactionList = (props: Props) => {
     console.log("get all result is: ", getAllResult);
   }, [getAllResult]); // Add getAllResult as a dependency
 
-  useEffect(() => {
-    console.log("userData", userData);
-  }, [userData]);
+  // useEffect(() => {
+  //   console.log("userData", userData);
+  // }, [userData]);
   return (
     <>
 
@@ -58,8 +55,8 @@ const TransactionList = (props: Props) => {
 
 
             <div className="  shadow rounded-lg px-4 ml-4 mt 4 mb-4 p-4 sm:p-6 h-full w-full">
-              <ItemList
-                userList={getAllResult} route ={item}/>
+              <TransactionItemList
+                transactionList={getAllResult} route ={item}/>
               {serverError && <div>{serverError}</div>}
 
             </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import { User } from '../../types';
+import { Station } from '../../types';
 import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
-import { getUserById } from '../../api';
+import { getStationById } from '../../api';
 
 interface Props {
 
@@ -10,72 +10,67 @@ interface Props {
 const tableConfig = [
     {
         label: "Id",
-        render: (user: User) => user.id,
+        render: (station: Station) => station.id,
         subTitle:
           "Unique identifier",
       },
     {
-      label: "Full Name",
-      render: (user: User) => user.name,
-      subTitle:
-        "Complete legal name.",
+      label: "Name",
+      render: (station: Station) => station.name,
+      subTitle:"Name of curently selected station",
+
     },
     {
-        label: "Email",
-        render: (user: User) => user.email,
-        subTitle: "Primary email address for contact",
-      },
-      {
-        label: "Phone",
-        render: (user: User) => user.phone,
-        subTitle: "Primary contact number",
+        label: "Status",
+        render: (station: Station) => station.status,
+        subTitle: "Current operational status",
       },
       {
         label: "Address",
-        render: (user: User) => user.adress,
-        subTitle: "The user's residential or mailing address",
+        render: (station: Station) => station.adress,
+        subTitle: "Location of the station",
       }
 
   ];
   
 
-const UserDetalis = (props: Props) => {
+const TransactionDetails = (props: Props) => {
     const location = useLocation();
     // const params = new URLSearchParams(location.search);
     const queryString = location.search;
   
     // Remove the leading '?' if present
-    const userId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+    const stationId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
   
-    console.log(userId);
+    console.log(stationId);
 
-    const [userData, setUserData] = useState<User | undefined>();
+    const [stationData, setStationData] = useState<Station | undefined>();
     useEffect(()=>{
-     const getUser = async()=>{
-       const value= await getUserById(userId);
+     const getStation = async()=>{
+       const value= await getStationById(stationId);
        if (value && value.data && Array.isArray(value.data)) {
         // If the response is an array, take the first element
         if (value.data.length > 0) {
-          setUserData(value.data[0]);
+          setStationData(value.data[0]);
         } else {
           // Handle case where no user is found
-          setUserData(undefined);
+          setStationData(undefined);
         }
       } else {
         // Handle other cases where data may be missing or not in the expected format
-        setUserData(value?.data as User|undefined);
+        setStationData(value?.data as Station|undefined);
       }
-    //    setUserData(value?.data[0])//number needs to be dinamically added for user id
+    //    setStationData(value?.data[0])//number needs to be dinamically added for user id
        console.log( "value", value);
      };
-     getUser(); 
+     getStation(); 
      
     },[])
   return (
     <>
-    {userData? (
+    {stationData? (
       <>
-            <ItemDetailsList data={userData} config={tableConfig}/>
+            <ItemDetailsList data={stationData} config={tableConfig}/>
 
             <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end w-full">
           <Link
@@ -101,4 +96,4 @@ const UserDetalis = (props: Props) => {
   )
 }
 
-export default UserDetalis
+export default TransactionDetails

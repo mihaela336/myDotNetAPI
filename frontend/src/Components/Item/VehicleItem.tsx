@@ -1,35 +1,35 @@
 import React, { SyntheticEvent } from 'react'
 import { Link } from 'react-router-dom';
-import { User } from '../../types';
+import { Vehicle } from '../../types';
 
 interface Props {
-    id: string;
-    user: User;
+    id: number;
+    vehicle: Vehicle;
     route: string;
-    //   onChargingSessionCreate: (e: SyntheticEvent)=> void;
+  }
 
-}
-
-const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
+const Item: React.FC<Props> = ({ id, vehicle , route}: Props): JSX.Element => {
+    const idAsString: string = id.toString();
     return (
         <div
             className="py-3 sm:py-4"
 
-            id={id}
+            id={idAsString}
         >
 
-            {/* <li className="py-3 sm:py-4"> */}
             <div className="flex items-center space-x-4 truncate  border-b border-gray-200">
                 <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
 
-                        <Link to={`/${route}/details?${user.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
-                            {user.name} 
+                    <Link to={`/${route}/details?${vehicle.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
+                            {vehicle.producer} {vehicle.model}
                         </Link>
 
                     </p>
                     <p className="text-sm text-gray-500 truncate">
-                        {user.email}
+                    <span className="font-bold mr-2">Register date:
+                        </span>
+                        {vehicle.addedOn}
                     </p>
                 </div>
                 <div className="inline-flex items-center text-base">
@@ -48,7 +48,7 @@ const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
                     </button>
                 </div>
             </div>
-            {/* </li> */}
+   
         </div>
 
 

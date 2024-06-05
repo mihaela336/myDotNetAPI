@@ -1,37 +1,50 @@
 import React, { SyntheticEvent } from 'react'
 import { Link } from 'react-router-dom';
-import { User } from '../../types';
+import { Transaction, User } from '../../types';
 
 interface Props {
-    id: string;
-    user: User;
+    id: number;
+    transaction: Transaction;
     route: string;
     //   onChargingSessionCreate: (e: SyntheticEvent)=> void;
 
 }
 
-const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
+const Item: React.FC<Props> = ({ id, transaction , route}: Props): JSX.Element => {
+    const idAsString: string = id.toString();
     return (
         <div
             className="py-3 sm:py-4"
 
-            id={id}
+            id={idAsString}
         >
 
-            {/* <li className="py-3 sm:py-4"> */}
+   
             <div className="flex items-center space-x-4 truncate  border-b border-gray-200">
-                <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
 
-                        <Link to={`/${route}/details?${user.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
-                            {user.name} 
+
+                        <Link to={`/${route}/details?${transaction.id}`} className="font-bold text-center text-veryDarkViolet md:text-left">
+                            <span className="mr-2">Transaction id:</span> {transaction.id}
                         </Link>
 
                     </p>
-                    <p className="text-sm text-gray-500 truncate">
-                        {user.email}
+                    <p className="text-sm mt-2 text-gray-500 truncate">
+
+                        <span className="font-bold mr-2">Date:
+                        </span>
+                        {transaction.createdOn}
                     </p>
+                    <p className="text-sm mt-2 text-gray-500 truncate">
+
+                        <span className="font-bold mr-2">Total:
+                        </span>
+                        {transaction.total}
+                    </p>
+
                 </div>
+
                 <div className="inline-flex items-center text-base">
                     <Link to={`/${route}/update`}>
                     <button
@@ -48,7 +61,7 @@ const Item: React.FC<Props> = ({ id, user , route}: Props): JSX.Element => {
                     </button>
                 </div>
             </div>
-            {/* </li> */}
+
         </div>
 
 

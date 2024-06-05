@@ -1,20 +1,20 @@
 import React, { SyntheticEvent } from 'react'
-import { User } from '../../types';
+import { User, Vehicle } from '../../types';
 import Item from '../Item/Item';
+import VehicleItem from '../Item/VehicleItem';
 
 
 interface Props {
-  userList: User[];
+  vehicleList: Vehicle[];
   route: string;
-  // onChargingSessionCreate: (e: SyntheticEvent)=>void;
 }
 
-const ItemList : React.FC<Props> = ({userList, route}: Props) : JSX.Element => {
+const ItemList : React.FC<Props> = ({vehicleList, route}: Props) : JSX.Element => {
   return (
     <>
-  {userList.length >0 ?(
-    userList.map((result)=>{
-      return <Item id ={result.name} user={result}  route={route}/>;
+  {vehicleList.length >0 ?(
+    vehicleList.map((result)=>{
+      return <VehicleItem id ={result.id} vehicle={result}  route={route}/>;
       console.log("result is", result);
 
     })
