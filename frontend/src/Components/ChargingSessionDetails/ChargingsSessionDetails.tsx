@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import { User } from '../../types';
+import { ChargingSession } from '../../types';
 import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
-import { getUserById } from '../../api';
+import { getChargingSessionById } from '../../api';
 
 interface Props {
 
@@ -10,30 +10,35 @@ interface Props {
 const tableConfig = [
     {
         label: "Id",
-        render: (user: User) => user.id,
+        render: (chargingSession: ChargingSession) => chargingSession.id,
         subTitle:
           "Unique identifier",
       },
     {
-      label: "Full Name",
-      render: (user: User) => user.name,
+      label: "Station Id",
+      render: (chargingSession: ChargingSession) => chargingSession.stationId,
       subTitle:
-        "Complete legal name.",
+        "Id of station where vehicle was charged",
     },
-    {
-        label: "Email",
-        render: (user: User) => user.email,
-        subTitle: "Primary email address for contact",
+      {
+        label: "Session Start",
+        render: (chargingSession: ChargingSession) => chargingSession.sessionStart,
+        subTitle: "Session began at",
       },
       {
-        label: "Phone",
-        render: (user: User) => user.phone,
-        subTitle: "Primary contact number",
+        label: "Session end",
+        render: (chargingSession: ChargingSession) => chargingSession.sessionEnd,
+        subTitle: "Session completed at",
       },
       {
-        label: "Address",
-        render: (user: User) => user.adress,
-        subTitle: "The user's residential or mailing address",
+        label: "Charging time",
+        render: (chargingSession: ChargingSession) => chargingSession.chargingTime,
+        subTitle: "Charging session length",
+      },
+      {
+        label: "KWh Delivered",
+        render: (chargingSession: ChargingSession) => chargingSession.kwhDelivered,
+        subTitle: "Energy delivered during the session",
       }
 
   ];
@@ -45,41 +50,41 @@ const ChargingSessionDetails = (props: Props) => {
     const queryString = location.search;
   
     // Remove the leading '?' if present
-    const userId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+    const chargingSessionId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
   
-    console.log(userId);
+    console.log(chargingSessionId);
 
-    const [userData, setUserData] = useState<User | undefined>();
+    const [chargingSessionData, setChargingSessionData] = useState<ChargingSession | undefined>();
     useEffect(()=>{
-     const getUser = async()=>{
-       const value= await getUserById(userId);
+     const getChargingSession = async()=>{
+       const value= await getChargingSessionById(chargingSessionId);
        if (value && value.data && Array.isArray(value.data)) {
         // If the response is an array, take the first element
         if (value.data.length > 0) {
-          setUserData(value.data[0]);
+          setChargingSessionData(value.data[0]);
         } else {
-          // Handle case where no user is found
-          setUserData(undefined);
+          // Handle case where no chargingSession is found
+          setChargingSessionData(undefined);
         }
       } else {
         // Handle other cases where data may be missing or not in the expected format
-        setUserData(value?.data as User|undefined);
+        setChargingSessionData(value?.data as ChargingSession|undefined);
       }
-    //    setUserData(value?.data[0])//number needs to be dinamically added for user id
+    //    setChargingSessionData(value?.data[0])//number needs to be dinamically added for chargingSession id
        console.log( "value", value);
      };
-     getUser(); 
+     getChargingSession(); 
      
     },[])
   return (
     <>
-    {userData? (
+    {chargingSessionData? (
       <>
-            <ItemDetailsList data={userData} config={tableConfig}/>
+            <ItemDetailsList data={chargingSessionData} config={tableConfig}/>
 
             <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end w-full">
           <Link
-              to="/user/add">
+              to="/chargingSession/add">
            <button
               type="submit"
               className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"

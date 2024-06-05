@@ -1,6 +1,6 @@
 import axios from "axios"
 import { CreateStationRequestDto, StationDetails, StationKeyMetrics } from "./station"
-import { User } from "./types";
+import { ChargingSession, PaymentPlan, Transaction, User, Vehicle } from "./types";
 interface SearchResponse {
     data: CreateStationRequestDto[];
 
@@ -37,14 +37,8 @@ export const searchStations = async (query: string) => {
     }
 }
 
-export const getStationDetails = async (query: string) => {
-    try {
-        const data = await axios.get<StationDetails>(`http://localhost:5220/api/station/${query}`);
-        return data;
-    } catch (error: any) {
-        console.log(" error message from API: ", error.message);
-    }
-}
+
+
 
 export const getKeyMetrics = async(query:string)=>{
     try{
@@ -70,6 +64,51 @@ export const getUserById = async(query:string)=>{
 
     };
     
+}
+
+export const getStationById = async (query: string) => {
+    try {
+        const data = await axios.get<StationDetails>(`http://localhost:5220/api/station/${query}`);
+        return data;
+    } catch (error: any) {
+        console.log(" error message from API: ", error.message);
+    }
+}
+
+export const getChargingSessionById = async (query: string) => {
+    try {
+        const data = await axios.get<ChargingSession>(`http://localhost:5220/api/chargingSession/${query}`);
+        return data;
+    } catch (error: any) {
+        console.log(" error message from API: ", error.message);
+    }
+}
+
+export const getTransactionById = async (query: string) => {
+    try {
+        const data = await axios.get<Transaction>(`http://localhost:5220/api/transaction/${query}`);
+        return data;
+    } catch (error: any) {
+        console.log(" error message from API: ", error.message);
+    }
+}
+
+export const getPaymentPlanById = async (query: string) => {
+    try {
+        const data = await axios.get<PaymentPlan>(`http://localhost:5220/api/paymentplan/${query}`);
+        return data;
+    } catch (error: any) {
+        console.log(" error message from API: ", error.message);
+    }
+}
+
+export const getVehicleById = async (query: string) => {
+    try {
+        const data = await axios.get<Vehicle>(`http://localhost:5220/api/vehicle/${query}`);
+        return data;
+    } catch (error: any) {
+        console.log(" error message from API: ", error.message);
+    }
 }
 
 export const getTransactions = async(query:string)=>{
