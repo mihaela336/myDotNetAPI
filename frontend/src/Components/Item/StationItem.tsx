@@ -27,13 +27,13 @@ const StationItem: React.FC<Props> = ({ id, station, route }: Props): JSX.Elemen
                     </p>
                     <p className="text-sm mt-2 text-gray-500 truncate">
 
-                        <span className="font-bold mr-2">Charging session length:
+                        <span className="font-bold mr-2">Status:
                         </span>
                         {station.status}
                     </p>
                     <p className="text-sm mt-2 text-gray-500 truncate">
 
-                        <span className="font-bold mr-2">KWh Delivered:
+                        <span className="font-bold mr-2">Adress:
                         </span>
                         {station.adress}
                     </p>

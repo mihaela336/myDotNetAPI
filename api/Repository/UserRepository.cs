@@ -20,13 +20,16 @@ namespace api.Repository
         {
             return await _context.Users.Include(c=> c.Transactions).ToListAsync();
         }
-
-        public async Task<List<User>> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
-           //  return await _context.users.Include(c=> c.Transactions).FirstOrDefaultAsync(i =>i.Id == id);
-
+            return await _context.Users.Include(c => c.Transactions).FirstOrDefaultAsync(i => i.Id == id);
         }
+
+
+        //public async Task<User> IUserRepository.GetByIdAsync(string id)
+        //{
+        //    return await _context.Users.Include(c => c.Transactions).FirstOrDefaultAsync(i => i.Id == id);
+        //}
 
         // public async Task<List<User>>GetByIdAsync (int id)
         // {

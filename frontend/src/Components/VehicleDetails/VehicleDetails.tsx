@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router-dom';
-import { User } from '../../types';
+import { Vehicle } from '../../types';
 import ItemDetailsList from '../ItemDetailsList/ItemDetailsList';
-import { getUserById } from '../../api';
+import { getVehicleById } from '../../api';
 
 interface Props {
 
 }
 const tableConfig = [
     {
-        label: "Id",
-        render: (user: User) => user.id,
+        label: "Vehicle Id",
+        render: (vehicle: Vehicle) => vehicle.id,
         subTitle:
-          "Unique identifier",
+          "Unique identifier of the vehicle",
       },
     {
-      label: "Full Name",
-      render: (user: User) => user.name,
+      label: "Owner ID",
+      render: (vehicle: Vehicle) => vehicle.userId,
       subTitle:
-        "Complete legal name.",
+        "Unique identifyer of the vehicle who owns the vehicle",
     },
     {
-        label: "Email",
-        render: (user: User) => user.email,
-        subTitle: "Primary email address for contact",
+        label: "Registration date",
+        render: (vehicle: Vehicle) => vehicle.addedOn,
+        subTitle: "Date when the vehicle was registered",
       },
       {
-        label: "Phone",
-        render: (user: User) => user.phone,
-        subTitle: "Primary contact number",
+        label: "Producer",
+        render: (vehicle: Vehicle) => vehicle.producer,
+        subTitle: "",
       },
       {
-        label: "Address",
-        render: (user: User) => user.adress,
-        subTitle: "The user's residential or mailing address",
+        label: "Model",
+        render: (vehicle: Vehicle) => vehicle.model,
+        subTitle: "",
       }
 
   ];
@@ -45,41 +45,41 @@ const VehicleDetails = (props: Props) => {
     const queryString = location.search;
   
     // Remove the leading '?' if present
-    const userId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+    const vehicleId = queryString.startsWith('?') ? queryString.substring(1) : queryString;
   
-    console.log(userId);
+    console.log(vehicleId);
 
-    const [userData, setUserData] = useState<User | undefined>();
+    const [vehicleData, setVehicleData] = useState<Vehicle | undefined>();
     useEffect(()=>{
-     const getUser = async()=>{
-       const value= await getUserById(userId);
+     const getVehicle = async()=>{
+       const value= await getVehicleById(vehicleId);
        if (value && value.data && Array.isArray(value.data)) {
         // If the response is an array, take the first element
         if (value.data.length > 0) {
-          setUserData(value.data[0]);
+          setVehicleData(value.data[0]);
         } else {
-          // Handle case where no user is found
-          setUserData(undefined);
+          // Handle case where no vehicle is found
+          setVehicleData(undefined);
         }
       } else {
         // Handle other cases where data may be missing or not in the expected format
-        setUserData(value?.data as User|undefined);
+        setVehicleData(value?.data as Vehicle|undefined);
       }
-    //    setUserData(value?.data[0])//number needs to be dinamically added for user id
+    //    setVehicleData(value?.data[0])//number needs to be dinamically added for vehicle id
        console.log( "value", value);
      };
-     getUser(); 
+     getVehicle(); 
      
     },[])
   return (
     <>
-    {userData? (
+    {vehicleData? (
       <>
-            <ItemDetailsList data={userData} config={tableConfig}/>
+            <ItemDetailsList data={vehicleData} config={tableConfig}/>
 
             <div className="flex flex-wrap items-center md:mt-10 mb-10 space-x-4 mr-64 justify-end w-full">
           <Link
-              to="/user/add">
+              to="/vehicle/add">
            <button
               type="submit"
               className="p-1 px-6 text-white mr-2 bg-lightGreen rounded-lg hover:opacity-70 focus:outline-none"
