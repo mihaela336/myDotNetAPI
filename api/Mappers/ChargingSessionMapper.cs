@@ -29,6 +29,7 @@ namespace api.Mappers
                 StationId = chargingSessionDto.StationId,
                 UserId = chargingSessionDto.UserId,
                 SessionStart = chargingSessionDto.SessionStart,
+                SessionEnd = chargingSessionDto.SessionEnd,
                 ChargingTime = chargingSessionDto.ChargingTime,
                 KwhDelivered = chargingSessionDto.KwhDelivered
 

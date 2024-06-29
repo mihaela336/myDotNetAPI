@@ -20,7 +20,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> GetAll()
         {
             var user = await _userRepo.GetAllAsync();

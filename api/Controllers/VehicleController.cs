@@ -54,7 +54,7 @@ namespace api.Controllers
             return Ok(vehicle.ToVehicleDto());
         }
   
-        [HttpGet("user/{userId:int}")]
+        [HttpGet("user/{userId}")]
         [Authorize(Roles = "Admin, User")]
 
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)

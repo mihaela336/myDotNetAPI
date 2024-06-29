@@ -51,7 +51,7 @@ namespace api.Repository
 
         public async Task<List<Transaction?>> GetByUserIdAsync(string userId)
         {
-            return await _context.Transactions.Where(t => t.UserId == userId).ToListAsync();
+            return await _context.Transactions?.Where(t => t.UserId == userId).ToListAsync();
         }
 
         public async Task<Transaction?> UpdateAsync(int id, UpdateTransactionRequestDto transactionDto)
